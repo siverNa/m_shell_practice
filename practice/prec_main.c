@@ -22,7 +22,12 @@ int main(void)
 	{
 		str = readline("practice : ");
 		//node.cmd_line = ft_split(str, ' ');
-		if (*str == '0')
+		if (str == NULL)
+		{
+			free(str);
+			continue ;
+		}
+		if (*str == '0' || str == NULL)
 		{
 			free(str);
 			str = NULL;

@@ -6,7 +6,11 @@ void free_cmdline(char **cmdline)
 	
 	i = 0;
 	while (cmdline[i])
-		free(cmdline[i++]);
+	{	
+		free(cmdline[i]);
+		cmdline[i] = NULL;
+		i++;
+	}
 	free(cmdline);
 	cmdline = NULL;
 }

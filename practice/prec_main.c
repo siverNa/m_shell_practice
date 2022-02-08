@@ -56,18 +56,18 @@ int	main(void)
 			exit(-1);
 		}
 		else if (*str == '\0')
-		{
 			free(str);
+		else
+		{
+			cmd.cmd_line = ft_split(str, ' ');
+			i = 0;
+			while (cmd.cmd_line[i])
+				printf("splited[%d] : %s\n", i++, cmd.cmd_line[i]);
+			add_history(str);
+			free(str);
+			free_cmdline(cmd.cmd_line);
 			str = NULL;
 		}
-		cmd.cmd_line = ft_split(str, ' ');
-		i = 0;
-		while (cmd.cmd_line[i])
-			printf("splited[%d] : %s\n", i++, cmd.cmd_line[i]);
-		add_history(str);
-		free(str);
-		free_cmdline(cmd.cmd_line);
-		str = NULL;
 	}
 	return (0);
 }

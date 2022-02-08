@@ -8,10 +8,11 @@
 # include <stdlib.h>
 # include <sys/wait.h>
 # include <signal.h>
+# include <termios.h>
 # define TRUE		1
 # define FALSE		0
 
-typedef struct		s_node
+typedef struct s_node
 {
 	char			**cmd_line;
 	struct s_node	*prev;

@@ -1,5 +1,20 @@
 #include "minishell_prec.h"
 
+void free_cmdline(char **cmdline)
+{
+	int i;
+	
+	i = 0;
+	while (cmdline[i])
+	{	
+		free(cmdline[i]);
+		cmdline[i] = NULL;
+		i++;
+	}
+	free(cmdline);
+	cmdline = NULL;
+}
+
 void sig_handler(int signum)
 {
 	if (signum != SIGINT)
@@ -12,53 +27,39 @@ void sig_handler(int signum)
 
 int main(void)
 {
-	t_deq	cmd;
+	t_node	cmd;
 	char	*str;
 	int		i;
 
 	signal(SIGINT, sig_handler);
-	init_cmd(&cmd);
 	while(1)
 	{
 		str = readline("practice : ");
-		//node.cmd_line = ft_split(str, ' ');
 		if (str == NULL)
 		{
 			free(str);
 			continue ;
 		}
-		if (*str == '0' || str == NULL)
+		if (*str == '0')
 		{
 			free(str);
 			str = NULL;
 			break ;
 		}
-		insert_str(&cmd, str);
+		cmd.cmd_line = ft_split(str, ' ');
 		i = 0;
-		while (cmd.tail->cmd_line[i])
-			printf("splited[%d] : %s\n", i++, cmd.tail->cmd_line[i]);
+		while (cmd.cmd_line[i])
+			printf("splited[%d] : %s\n", i++, cmd.cmd_line[i]);
 		add_history(str);
 		free(str);
+		free_cmdline(cmd.cmd_line);
 		str = NULL;
 	}
-	i = 0;
-	t_node	*temp;
-	temp = cmd.head;
-	while (i < cmd.size)
-	{
-		int j;
-		j = 0;
-		while (temp->cmd_line[j])
-			printf("stored str : %s\n", temp->cmd_line[j++]);
-		temp = temp->next;
-		i++;
-	}
-	free_deq(&cmd);
 	return (0);
 }
 
 /*
- comfile command
+ compile command
  gcc prec_main.c deque_func.c -lreadline 
 -L/home/linuxbrew/.linuxbrew/Cellar/readline/8.1.2/lib 
 -I/home/linuxbrew/.linuxbrew/Cellar/readline/8.1.2/include -L../libft -lft 

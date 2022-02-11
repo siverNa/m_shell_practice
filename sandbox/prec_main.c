@@ -59,6 +59,7 @@ int	main(void)
 			free(str);
 		else
 		{
+			printf("str: %s\n", str);
 			cmd.cmd_line = ft_split(str, ' ');
 			i = 0;
 			while (cmd.cmd_line[i])

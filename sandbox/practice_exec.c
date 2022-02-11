@@ -1,6 +1,6 @@
 #include "minishell_prec.h"
 
-void    convert_cmd(t_node *cmd, char **)
+//void    convert_cmd(t_node *cmd, char **)
 
 void    exec_cmd(t_node *cmd)
 {
@@ -16,12 +16,11 @@ void    exec_cmd(t_node *cmd)
 	}
 	if (pid == 0)
 	{
-/*
-*/
-		if (execlp("ls", "ls", "-la", NULL) < 0)
+		//if (execve("ls", cmd->cmd_line, NULL) < 0)
+		if (execlp("ls", "ls", "-al", NULL) < 0)
             write(1, "FAIL\n", 5);
-        //왜 이렇게 하나하나 입력해주면 되는데, cmd->cmd->line으로 인자를 주면 에러?
-        return ;
+        //왜 이렇게 하나하나 입력해주면 되는데, cmd->cmd_line으로 인자를 주면 에러?
+        exit(1) ;
 	}
 	else
 	{

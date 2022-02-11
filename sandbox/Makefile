@@ -2,7 +2,15 @@ NAME =		minishell_prec
 
 CC =		gcc
 LIBFT =		-L../libft -lft
-READLINE =	-lreadline -L/Users/minhekim/.brew/opt/readline/lib -I/Users/minhekim/.brew/opt/readline/include
+
+#needs to branch according to environment
+UNAME_S := $(shell uname -s)
+ifeq ($(UNAME_S),Linux)
+	READLINE =	-lreadline -L/home/linuxbrew/.linuxbrew/Cellar/readline/8.1.2/lib -I/home/linuxbrew/.linuxbrew/Cellar/readline/8.1.2/include
+endif
+ifeq ($(UNAME_S),DARWIN)
+	READLINE =	-lreadline -L/Users/minhekim/.brew/opt/readline/lib -I/Users/minhekim/.brew/opt/readline/include
+endif
 
 SRCS =		prec_main.c practice_exec.c
 

@@ -15,6 +15,8 @@
 typedef struct s_node
 {
 	char			**cmd_line;
+	int				fd[2];
+	int				status;
 	struct s_node	*prev;
 	struct s_node	*next;
 }					t_node;
@@ -38,4 +40,19 @@ int		dq_is_empty(t_deq *d);
 void	lst_addend(t_deq *deq, char *str);
 void	insert_str(t_deq *deq, char *str);
 */
+
+/*
+**	main.c
+*/
+void	free_cmdline(char **cmdline);
+void	sig_handler(int signum);
+void	setting_signal(void);
+
+/*
+**	prec_process.c
+*/
+void	free_struct(t_node *cmd, char *str);
+void child_process(t_node *cmd, char *str, char **env);
+void process(t_node *cmd, char *str, char **env);
+
 #endif

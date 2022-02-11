@@ -11,7 +11,7 @@ void child_process(t_node *cmd, char *str, char **env)
 {
 	if (!strcmp(cmd->cmd_line[0], "ls"))
 	{
-		if (execve("usr/bin/ls", cmd->cmd_line, env) == -1)
+		if (execve("/usr/bin/ls", cmd->cmd_line, env) == -1)
 		{
 			ft_putstr_fd("practice : command not found: ", 2);
 			ft_putstr_fd(cmd->cmd_line[0], 2);
@@ -34,8 +34,13 @@ void process(t_node *cmd, char *str, char **env)
 	}
 	else if (pid > 0)
 	{
-		waitpid(pid, &cmd->status, WNOHANG);
+		//waitpid(pid, &cmd->status, WNOHANG);
+		wait(NULL);
+		return ;
 	}
 	else if (pid == 0)
+	{
 		child_process(cmd, str, env);
+	}
+	return ;
 }

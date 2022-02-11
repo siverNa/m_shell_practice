@@ -63,18 +63,7 @@ int	main(int ac, char **av, char **env)
 			i = 0;
 			while (cmd.cmd_line[i])
 				printf("splited[%d] : %s\n", i++, cmd.cmd_line[i]);
-			//process(&cmd, str, env);
-			if (!strcmp(cmd.cmd_line[0], "ls"))
-			{
-				if (execve("/usr/bin/ls", cmd.cmd_line, env) == -1)
-				{
-					ft_putstr_fd("practice : command not found: ", 2);
-					ft_putstr_fd(cmd.cmd_line[0], 2);
-					ft_putstr_fd("\n", 2);
-					free_struct(&cmd, str);
-					exit(1);
-				}
-			}
+			process(&cmd, str, env);
 			add_history(str);
 			free(str);
 			free_cmdline(cmd.cmd_line);

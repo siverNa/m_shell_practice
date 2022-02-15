@@ -59,13 +59,11 @@ int	main(int ac, char **av, char **env)
 			free(str);
 		else
 		{
-			/*
 			cmd.cmd_line = ft_split(str, ' ');
 			i = 0;
 			while (cmd.cmd_line[i])
 				printf("splited[%d] : %s\n", i++, cmd.cmd_line[i]);
-			*/
-			cmd.cmd_line = cmd_init(str);
+			//cmd.cmd_line = cmd_init(str);
 			cmd.file_path = build_path(&cmd, cmd.cmd_line[0], env);
 			process(&cmd, str, env);
 			add_history(str);

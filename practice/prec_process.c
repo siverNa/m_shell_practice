@@ -3,23 +3,27 @@
 void	free_struct(t_node *cmd, char *str)
 {
 	free(str);
+	free(cmd->file_path);
 	free_cmdline(cmd->cmd_line);
 	str = NULL;
+	cmd->file_path = NULL;
+	cmd->cmd_line = NULL;
 }
 
 void child_process(t_node *cmd, char *str, char **env)
 {
-	if (!strcmp(cmd->cmd_line[0], "ls"))
+	//cmd->cmd_line = cmd_init(str);
+	//cmd->file_path = build_path(cmd, cmd->cmd_line[0], env);
+	if (execve(cmd->file_path, cmd->cmd_line, env) == -1)
 	{
-		if (execve("/usr/bin/ls", cmd->cmd_line, env) == -1)
-		{
-			ft_putstr_fd("practice : command not found: ", 2);
-			ft_putstr_fd(cmd->cmd_line[0], 2);
-			ft_putstr_fd("\n", 2);
-			free_struct(cmd, str);
-			exit(1);
-		}
+		ft_putstr_fd("practice : command not found: ", 2);
+		ft_putstr_fd(cmd->cmd_line[0], 2);
+		ft_putstr_fd("\n", 2);
+		free_struct(cmd, str);
+		exit(1);
 	}
+	else
+		return ;
 }
 
 void process(t_node *cmd, char *str, char **env)

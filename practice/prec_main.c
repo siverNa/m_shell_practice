@@ -59,15 +59,20 @@ int	main(int ac, char **av, char **env)
 			free(str);
 		else
 		{
+			/*
 			cmd.cmd_line = ft_split(str, ' ');
 			i = 0;
 			while (cmd.cmd_line[i])
 				printf("splited[%d] : %s\n", i++, cmd.cmd_line[i]);
+			*/
+			cmd.cmd_line = cmd_init(str);
+			cmd.file_path = build_path(&cmd, cmd.cmd_line[0], env);
 			process(&cmd, str, env);
 			add_history(str);
-			free(str);
-			free_cmdline(cmd.cmd_line);
-			str = NULL;
+			//free(str);
+			//free_cmdline(cmd.cmd_line);
+			//str = NULL;
+			free_struct(&cmd, str);
 		}
 	}
 	return (0);
@@ -75,7 +80,7 @@ int	main(int ac, char **av, char **env)
 
 /*
  compile command
- gcc prec_main.c prec_process.c -lreadline 
+ gcc prec_main.c prec_process.c cmd_init.c cmd_case.c cmd_build_path.c -lreadline 
 -L/home/linuxbrew/.linuxbrew/Cellar/readline/8.1.2/lib 
 -I/home/linuxbrew/.linuxbrew/Cellar/readline/8.1.2/include -L../libft -lft 
 -g3 -fsanitize=address

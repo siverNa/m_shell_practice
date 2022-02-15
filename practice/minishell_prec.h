@@ -9,17 +9,29 @@
 # include <sys/wait.h>
 # include <signal.h>
 # include <termios.h>
+# include <errno.h>
+# include <fcntl.h>
 # define TRUE		1
 # define FALSE		0
 
 typedef struct s_node
 {
 	char			**cmd_line;
+	char			*file_path;
+	char			*temp_path;
 	int				fd[2];
 	int				status;
 	struct s_node	*prev;
 	struct s_node	*next;
 }					t_node;
+
+typedef struct s_pars
+{
+	int				i;
+	int				j;
+	int				count;
+	int				len;
+}					t_pars;
 
 /*
 typedef struct		s_deq
@@ -52,7 +64,30 @@ void	setting_signal(void);
 **	prec_process.c
 */
 void	free_struct(t_node *cmd, char *str);
-void child_process(t_node *cmd, char *str, char **env);
-void process(t_node *cmd, char *str, char **env);
+void	child_process(t_node *cmd, char *str, char **env);
+void	process(t_node *cmd, char *str, char **env);
+
+/*
+** cmd_init.c
+*/
+char	**parsing_str(char *str, char **result, t_pars *pars);
+void	count_word(const char *str, int *i, int *count);
+int		count_str(const char *str);
+char	**cmd_init(const char *str);
+
+/*
+** cmd_case.c
+*/
+int		word_len(const char *str, int i, char c);
+void	case_double_q(char *str, char **result, t_pars *pars);
+void	case_single_q(char *str, char **result, t_pars *pars);
+void	case_space(char *str, char **result, t_pars *pars);
+
+/*
+** cmd_build_path.c
+*/
+void	free_2d_arr(char **str);
+void	catch_env_to_path(t_node *cmd, char **env);
+char	*build_path(t_node *cmd, char *cmd_line, char **env);
 
 #endif

@@ -45,6 +45,8 @@ int	main(int ac, char **av, char **env)
 	new_term.c_lflag &= ~(ECHOCTL);
 	tcsetattr(STDIN_FILENO, TCSANOW, &new_term);
 	setting_signal();
+	cmd.c_envs = NULL;
+	cmd.c_envs = copy_envs(env);
 	while (1)
 	{
 		str = readline("practice : ");

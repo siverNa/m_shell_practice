@@ -20,6 +20,7 @@ typedef struct s_node
 	char			**cmd_line;
 	char			*file_path;
 	char			*temp_path;
+	char			**c_envs;
 	int				fd[2];
 	int				status;
 	struct s_node	*prev;
@@ -121,6 +122,7 @@ int		print_error_msg_2(char *first, char *sec, char *err_msg);
 /*
 ** env_util.c
 */
+char	**copy_envs(char **envs);
 char	*find_value(char *input, char **envs);
 
 #endif

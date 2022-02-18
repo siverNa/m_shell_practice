@@ -6,6 +6,7 @@
 # include "../libft/libft.h"
 # include <unistd.h>
 # include <stdlib.h>
+# include <string.h>
 # include <sys/wait.h>
 # include <signal.h>
 # include <termios.h>
@@ -66,6 +67,7 @@ void	setting_signal(void);
 void	free_struct(t_node *cmd, char *str);
 void	child_process(t_node *cmd, char *str, char **env);
 void	process(t_node *cmd, char *str, char **env);
+void	start_process(t_node *cmd, char **envs);
 
 /*
 ** cmd_init.c
@@ -89,5 +91,36 @@ void	case_space(char *str, char **result, t_pars *pars);
 void	free_2d_arr(char **str);
 void	catch_env_to_path(t_node *cmd, char **env);
 char	*build_path(t_node *cmd, char *cmd_line, char **env);
+
+/*
+** builtin.c
+*/
+int		check_builtin(char **cmd_line);
+int		start_builtin(t_node *cmd, char **cmd_line, char **envs);
+
+/*
+** builtin_cd.c
+*/
+int		exec_cd_home(char *path, char **cmd_line, char **envs);
+int		exec_cd_envs(char *path, char **cmd_line, char **envs);
+void	set_pwd(char **envs);
+void	built_cd(char **cmd_line, char **envs);
+
+/*
+** builtin_export.c
+*/
+void	add_export(char *str, char **new, int i);
+int		check_export(char *str, char ***envs);
+
+/*
+** error_execute.c
+*/
+int		print_error_msg(char *input, char *err_msg);
+int		print_error_msg_2(char *first, char *sec, char *err_msg);
+
+/*
+** env_util.c
+*/
+char	*find_value(char *input, char **envs);
 
 #endif

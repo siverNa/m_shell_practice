@@ -14,7 +14,9 @@ void child_process(t_node *cmd, char *str, char **env)
 {
 	//cmd->cmd_line = cmd_init(str);
 	//cmd->file_path = build_path(cmd, cmd->cmd_line[0], env);
-	if (execve(cmd->file_path, cmd->cmd_line, env) == -1)
+	if ((check_builtin(cmd->cmd_line) == TRUE))
+		start_builtin(cmd, cmd->cmd_line, env);
+	else if (execve(cmd->file_path, cmd->cmd_line, env) == -1)
 	{
 		ft_putstr_fd("practice : command not found: ", 2);
 		ft_putstr_fd(cmd->cmd_line[0], 2);
@@ -47,4 +49,16 @@ void process(t_node *cmd, char *str, char **env)
 		child_process(cmd, str, env);
 	}
 	return ;
+}
+
+void	start_process(t_node *cmd, char **envs)
+{
+	while (cmd)
+	{
+		if (cmd->cmd_line[0])
+		{
+			if ((check_builtin(cmd->cmd_line) == TRUE))
+				start_builtin(cmd, cmd->cmd_line, envs);
+		}
+	}
 }

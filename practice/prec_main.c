@@ -78,7 +78,8 @@ int	main(int ac, char **av, char **env)
 
 /*
  compile command
- gcc prec_main.c prec_process.c cmd_init.c cmd_case.c cmd_build_path.c -lreadline 
+ gcc prec_main.c prec_process.c cmd_init.c cmd_case.c cmd_build_path.c builtin.c 
+ builtin_cd.c builtin_export.c env_util.c error_execute.c -lreadline 
 -L/home/linuxbrew/.linuxbrew/Cellar/readline/8.1.2/lib 
 -I/home/linuxbrew/.linuxbrew/Cellar/readline/8.1.2/include -L../libft -lft 
 -g3 -fsanitize=address

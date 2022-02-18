@@ -28,6 +28,7 @@ void	set_pwd(char **envs)
 	if (!temp)
 		return ;
 	cur_pwd = ft_strjoin("PWD=", getcwd(temp, 1024));
+	free (temp);
 	old_pwd = ft_strjoin("OLDPWD=", find_value("PWD", envs));
 	check_export(cur_pwd, &envs);
 	check_export(old_pwd, &envs);
@@ -40,7 +41,7 @@ void	built_cd(char **cmd_line, char **envs)
 	char	*path;
 	int		res;
 
-	path = NULL;
+	path = 0;
 	res = 0;
 	if (cmd_line[1] != NULL && cmd_line[1][0] != '~' && cmd_line[1][0] != '$')
 	{

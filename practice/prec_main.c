@@ -66,8 +66,8 @@ int	main(int ac, char **av, char **env)
 			while (cmd.cmd_line[i])
 				printf("splited[%d] : %s\n", i++, cmd.cmd_line[i]);
 			//cmd.cmd_line = cmd_init(str);
-			cmd.file_path = build_path(&cmd, cmd.cmd_line[0], env);
-			process(&cmd, str, env);
+			cmd.file_path = build_path(&cmd, cmd.cmd_line[0]);
+			process(&cmd, str);
 			add_history(str);
 			//free(str);
 			//free_cmdline(cmd.cmd_line);
@@ -75,6 +75,7 @@ int	main(int ac, char **av, char **env)
 			free_struct(&cmd, str);
 		}
 	}
+	free_cmdline(cmd.c_envs);
 	return (0);
 }
 

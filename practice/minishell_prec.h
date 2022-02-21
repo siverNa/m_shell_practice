@@ -66,9 +66,9 @@ void	setting_signal(void);
 **	prec_process.c
 */
 void	free_struct(t_node *cmd, char *str);
-void	child_process(t_node *cmd, char *str, char **env);
-void	process(t_node *cmd, char *str, char **env);
-void	start_process(t_node *cmd, char **envs);
+void	child_process(t_node *cmd, char *str);
+void	process(t_node *cmd, char *str);
+void	start_process(t_node *cmd);
 
 /*
 ** cmd_init.c
@@ -90,21 +90,21 @@ void	case_space(char *str, char **result, t_pars *pars);
 ** cmd_build_path.c
 */
 void	free_2d_arr(char **str);
-void	catch_env_to_path(t_node *cmd, char **env);
-char	*build_path(t_node *cmd, char *cmd_line, char **env);
+void	catch_env_to_path(t_node *cmd);
+char	*build_path(t_node *cmd, char *cmd_line);
 
 /*
 ** builtin.c
 */
 int		check_builtin(char **cmd_line);
-int		start_builtin(t_node *cmd, char **cmd_line, char **envs);
+int		start_builtin(t_node *cmd, char **cmd_line);
 
 /*
 ** builtin_cd.c
 */
-int		exec_cd_home(char *path, char **cmd_line, char **envs);
-int		exec_cd_envs(char *path, char **cmd_line, char **envs);
-void	set_pwd(char **envs);
+int		exec_cd_home(char *path, char **cmd_line, char **c_envs);
+int		exec_cd_envs(char *path, char **cmd_line, char **c_envs);
+void	set_pwd(char **c_envs);
 void	built_cd(char **cmd_line, char **envs);
 
 /*

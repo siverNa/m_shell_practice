@@ -10,13 +10,13 @@ void	free_struct(t_node *cmd, char *str)
 	cmd->cmd_line = NULL;
 }
 
-void child_process(t_node *cmd, char *str, char **env)
+void child_process(t_node *cmd, char *str)
 {
 	//cmd->cmd_line = cmd_init(str);
 	//cmd->file_path = build_path(cmd, cmd->cmd_line[0], env);
 	if ((check_builtin(cmd->cmd_line) == TRUE))
-		start_builtin(cmd, cmd->cmd_line, env);
-	else if (execve(cmd->file_path, cmd->cmd_line, env) == -1)
+		start_builtin(cmd, cmd->cmd_line);
+	else if (execve(cmd->file_path, cmd->cmd_line, cmd->c_envs) == -1)
 	{
 		ft_putstr_fd("practice : command not found: ", 2);
 		ft_putstr_fd(cmd->cmd_line[0], 2);
@@ -28,7 +28,7 @@ void child_process(t_node *cmd, char *str, char **env)
 		return ;
 }
 
-void process(t_node *cmd, char *str, char **env)
+void process(t_node *cmd, char *str)
 {
 	pid_t	pid;
 
@@ -46,19 +46,20 @@ void process(t_node *cmd, char *str, char **env)
 	}
 	else if (pid == 0)
 	{
-		child_process(cmd, str, env);
+		//child_process(cmd, str, env);
+		child_process(cmd, str);
 	}
 	return ;
 }
 
-void	start_process(t_node *cmd, char **envs)
+void	start_process(t_node *cmd)
 {
 	while (cmd)
 	{
 		if (cmd->cmd_line[0])
 		{
 			if ((check_builtin(cmd->cmd_line) == TRUE))
-				start_builtin(cmd, cmd->cmd_line, envs);
+				start_builtin(cmd, cmd->cmd_line);
 		}
 	}
 }

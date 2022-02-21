@@ -13,13 +13,13 @@ int	check_builtin(char **cmd_line)
 	return (FALSE);
 }
 
-int	start_builtin(t_node *cmd, char **cmd_line, char **envs)
+int	start_builtin(t_node *cmd, char **cmd_line)
 {
 	char	*builtin;
 
 	builtin = cmd->cmd_line[0];
 	if (!ft_strncmp(builtin, "cd", 2))
-		built_cd(cmd_line, envs);
+		built_cd(cmd_line, cmd->c_envs);
 	else if (!ft_strncmp(builtin, "echo", 4))
 		ft_putendl_fd("you type echo!", 1);
 	else if (!ft_strncmp(builtin, "pwd", 3))

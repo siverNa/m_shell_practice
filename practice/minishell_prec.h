@@ -108,6 +108,11 @@ void	set_pwd(char **c_envs);
 void	built_cd(char **cmd_line, char **envs);
 
 /*
+** builtin_pwd.c
+*/
+void	built_pwd(void);
+
+/*
 ** builtin_export.c
 */
 void	add_export(char *str, char **new, int i);

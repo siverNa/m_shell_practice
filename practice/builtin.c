@@ -23,7 +23,7 @@ int	start_builtin(t_node *cmd, char **cmd_line)
 	else if (!ft_strncmp(builtin, "echo", 4))
 		ft_putendl_fd("you type echo!", 1);
 	else if (!ft_strncmp(builtin, "pwd", 3))
-		ft_putendl_fd("you type pwd!", 1);
+		built_pwd();
 	else if (!ft_strncmp(builtin, "env", 3))
 		ft_putendl_fd("you type env!", 1);
 	else if (!ft_strncmp(builtin, "export", 6))

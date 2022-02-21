@@ -113,6 +113,11 @@ void	built_cd(char **cmd_line, char **envs);
 void	built_pwd(void);
 
 /*
+** builtin_env.c
+*/
+void	built_env(char **c_envs);
+
+/*
 ** builtin_export.c
 */
 void	add_export(char *str, char **new, int i);

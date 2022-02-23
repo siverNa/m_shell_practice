@@ -49,7 +49,7 @@ int	main(int ac, char **av, char **env)
 	cmd.c_envs = copy_envs(env);
 	while (1)
 	{
-		str = readline("practice : ");
+		str = readline("\033[34;1mpractice : \033[0m");
 		if (!str)
 		{
 			printf("\033[1A");

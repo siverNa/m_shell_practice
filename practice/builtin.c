@@ -21,7 +21,7 @@ int	start_builtin(t_node *cmd, char **cmd_line)
 	if (!ft_strncmp(builtin, "cd", 2))
 		built_cd(cmd_line, cmd->c_envs);
 	else if (!ft_strncmp(builtin, "echo", 4))
-		ft_putendl_fd("you type echo!", 1);
+		built_echo(cmd_line, cmd->c_envs);
 	else if (!ft_strncmp(builtin, "pwd", 3))
 		built_pwd();
 	else if (!ft_strncmp(builtin, "env", 3))
@@ -35,4 +35,24 @@ int	start_builtin(t_node *cmd, char **cmd_line)
 	else
 		return (0);
 	return (1);
+}
+
+int	remove_char(char *str, char c)
+{
+	int		new_i;
+	int		i;
+
+	new_i = 0;
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] != c)
+		{
+			str[new_i] = str[i];
+			new_i++;
+		}
+		i++;
+	}
+	str[new_i] = '\0';
+	return (TRUE);
 }

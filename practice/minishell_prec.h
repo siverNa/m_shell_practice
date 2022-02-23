@@ -14,6 +14,9 @@
 # include <fcntl.h>
 # define TRUE		1
 # define FALSE		0
+# define STDIN		0
+# define STDOUT		1
+# define STDERR		2
 
 typedef struct s_node
 {
@@ -98,6 +101,7 @@ char	*build_path(t_node *cmd, char *cmd_line);
 */
 int		check_builtin(char **cmd_line);
 int		start_builtin(t_node *cmd, char **cmd_line);
+int		remove_char(char *str, char c);
 
 /*
 ** builtin_cd.c
@@ -122,6 +126,14 @@ void	built_env(char **c_envs);
 */
 void	add_export(char *str, char **new, int i);
 int		check_export(char *str, char ***envs);
+
+/*
+** builtin_echo.c
+*/
+void	echo_exit_status(void);
+void	echo_envs(char **cmd_line, char **envs, int i);
+int		is_option_n(char *str);
+void	built_echo(char **cmd_line, char **envs);
 
 /*
 ** error_execute.c

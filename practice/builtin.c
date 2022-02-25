@@ -27,7 +27,7 @@ int	start_builtin(t_node *cmd, char **cmd_line)
 	else if (!ft_strncmp(builtin, "env", 3))
 		built_env(cmd->c_envs);
 	else if (!ft_strncmp(builtin, "export", 6))
-		ft_putendl_fd("you type export!", 1);
+		built_export(cmd, cmd_line);
 	else if (!ft_strncmp(builtin, "unset", 5))
 		ft_putendl_fd("you type unset!", 1);
 	else if (!ft_strncmp(builtin, "exit", 4))

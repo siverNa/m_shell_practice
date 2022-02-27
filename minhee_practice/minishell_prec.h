@@ -24,7 +24,8 @@ typedef struct s_node
 typedef struct s_data
 {
 	char	*str;
-	char	**buf;
+	char	**tokens;
+	char	**env;
 }				t_data;
 
 /*
@@ -61,6 +62,12 @@ void	free_struct(t_node *cmd, char *str);
 void child_process(t_node *cmd, char *str, char **env);
 void process(t_node *cmd, char *str, char **env);
 
+
+int ft_strcmp(char *s1, char *s2);
+char	*find_value(char *input, char **envs);
+
 t_node   *parse(char **buf);
+char	**copy_envs(char **envs);
+char	**tokenize(char *str, char **env);
 
 #endif

@@ -27,21 +27,21 @@ int ft_strcmp(char *s1, char *s2)
         return (0);
 }
 
-void    add_list_back(t_node *list, t_node *new_node)
+void    add_list_back(t_node **list, t_node *new_node)
 {
-    t_node   cur;
+    t_node   *cur;
 
-    if (list == NULL)
-    {
-        list = new_node;
-        return ;
-    }
-
-    cur = *list;
-    while (cur.next)
-        cur = *cur.next;
-
-    cur.next = new_node;
+    if (list == 0 || new_node == 0)
+		return ;
+	if (*list == 0)
+		*list = new_node;
+	else
+	{
+		cur = *list;
+		while (cur->next != NULL)
+			cur = cur->next;
+		cur->next = new_node;
+	}
     return ;
 }
 
@@ -56,46 +56,29 @@ t_node   *parse(char **buf)
     i = 0;
     while (buf[i] != NULL)
     {
-        printf("buf[%d]: [%s]\n", i, buf[i]);
-        i++;
-    }
-
-    i = 0;
-    while (buf[i] != NULL)
-    {
         new_node = (t_node *)malloc(sizeof(t_node));
         if (new_node == NULL)
             exit(1);
-
         j = i;
-        while (buf[j] != NULL && ft_strcmp(buf[j], ";") == 0 && ft_strcmp(buf[j], "|") == 0)
-        {
+        while (buf[j] != NULL && ft_strcmp(buf[j], "|") == 0)
             j++;
-        }      
-
         new_node->cmd_line = (char **)malloc(sizeof(char *) * (j - i + 1));
         if (new_node->cmd_line == NULL)
             exit(1);
-
         k = 0;
         while (i < j)
-        {
+		{
             new_node->cmd_line[k] = ft_strdup(buf[i]);
-            k++;
-            i++;
-        }
-
+			k++;
+			i++;
+		}
         new_node->cmd_line[k] = NULL;
         new_node->next = NULL;
-
         if (ft_strcmp(buf[i], "|"))
             new_node->status = 1;
-
         if (buf[i] != NULL)
             i++;
-
-        add_list_back(list, new_node);
+        add_list_back(&list, new_node);
     }
-
     return (list);
 }

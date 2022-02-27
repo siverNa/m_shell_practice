@@ -36,7 +36,7 @@ int	main(int ac, char **av, char **env)
 {
 	t_data			input;
 	t_node			*cmds;
-	int				i;
+	int				i, k;
 	struct termios	org_term;
 	struct termios	new_term;
 
@@ -45,6 +45,8 @@ int	main(int ac, char **av, char **env)
 	new_term.c_lflag &= ~(ECHOCTL);
 	tcsetattr(STDIN_FILENO, TCSANOW, &new_term);
 	setting_signal();
+	input.env = NULL;
+	input.env = copy_envs(env);
 	while (1)
 	{
 		input.str = readline("practice : ");
@@ -59,20 +61,38 @@ int	main(int ac, char **av, char **env)
 			free((input.str));
 		else
 		{
-			input.buf = ft_split(input.str, ' ');
-			cmds = parse(input.buf);
-/*
-			cur = *cmds;
-			while (cur)
+			input.tokens = tokenize(input.str, input.env);
+			write(1, "------------------------------\n", 31);
+			printf("printing tokens\n");
+			i = 0;
+			while (input.tokens[i])
 			{
-				//exec
-				//testing: prints cur.cmdline;
-				cur = cur.next;
+				printf("token[%d]: [%s]\n", i, input.tokens[i]);
+				i++;
 			}
-*/			
+			write(1, "------------------------------\n", 31);
+			cmds = parse(input.tokens);
+			if (cmds == NULL)
+				printf("cmds is NULL\n");
+			k = 0;
+			while (cmds != NULL)
+			{
+				printf("command[%d]: ", k);
+				i = 0;
+				while (cmds->cmd_line[i] != NULL)
+				{
+					printf("(%s) ", cmds->cmd_line[i]);
+					i++;
+				}
+				printf("\n");
+				cmds = cmds->next;
+				k++;
+			}
+			printf("end of cmds\n");
+			write(1, "------------------------------\n", 31);
 			add_history(input.str);
 			free(input.str);
-			//free_cmdline(cmd.cmd_line);
+			i = 0;
 			input.str = NULL;
 		}
 	}

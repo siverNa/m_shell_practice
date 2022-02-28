@@ -29,7 +29,7 @@ int	start_builtin(t_node *cmd, char **cmd_line)
 	else if (!ft_strncmp(builtin, "export", 6))
 		built_export(cmd, cmd_line);
 	else if (!ft_strncmp(builtin, "unset", 5))
-		ft_putendl_fd("you type unset!", 1);
+		built_unset(cmd, cmd_line);
 	else if (!ft_strncmp(builtin, "exit", 4))
 		ft_putendl_fd("you type exit!", 1);
 	else

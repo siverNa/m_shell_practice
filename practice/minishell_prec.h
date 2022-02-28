@@ -14,9 +14,13 @@
 # include <fcntl.h>
 # define TRUE		1
 # define FALSE		0
+
 # define STDIN		0
 # define STDOUT		1
 # define STDERR		2
+
+# define SUCCESS	1
+# define ERROR		-1
 
 typedef struct s_node
 {
@@ -137,6 +141,14 @@ void	echo_exit_status(void);
 void	echo_envs(char **cmd_line, char **envs, int i);
 int		is_option_n(char *str);
 void	built_echo(char **cmd_line, char **envs);
+
+/*
+** builtin_unset.c
+*/
+int		isvalid_env(char *line);
+int		check_key_value(char *line, char *envs);
+int		env_unset(char *line, char ***envs);
+void	built_unset(t_node *cmd, char **cmd_line);
 
 /*
 ** error_execute.c

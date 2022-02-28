@@ -15,7 +15,7 @@ int	check_export(char *str, char ***envs)
 		return (-1);
 	i = -1;
 	while ((*envs)[++i] != NULL)
-	{	
+	{
 		if (!ft_strncmp((*envs)[i], str, ft_strlen(str)))
 		{
 			(*envs)[i] = ft_strdup(str);

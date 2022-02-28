@@ -70,4 +70,6 @@ t_node   *parse(char **buf);
 char	**copy_envs(char **envs);
 char	**tokenize(char *str, char **env);
 
+void	free_cmds_list(t_node *list);
+void	free_tokens(char **token);
 #endif

@@ -4,7 +4,7 @@ CC =		gcc
 LIBFT =		-L../libft -lft
 READLINE =	-lreadline -L/home/linuxbrew/.linuxbrew/Cellar/readline/8.1.2/lib -I/home/linuxbrew/.linuxbrew/Cellar/readline/8.1.2/include
 
-SRCS =		prec_main.c prec_process.c parse.c tokenize.c env_util.c
+SRCS =		prec_main.c prec_process.c parse.c tokenize.c env_util.c free.c
 
 OBJS =		$(SRCS:.c=.o)
 

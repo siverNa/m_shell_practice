@@ -213,7 +213,10 @@ char	**tokenize(char *str, char **env)
 	count = count_tokens(str);
 	ret = (char **)malloc(sizeof(char *) * (count + 1));
 	if (!ret)
+	{
+		free(str);
 		exit(1);
+	}
 	ret[count] = NULL;
 	i = 0;
 	j = 0;
@@ -222,5 +225,6 @@ char	**tokenize(char *str, char **env)
 		ret[i] = parse_token(str, &j, env);
 		i++;
 	}
+	free(str);
 	return (ret);
 }

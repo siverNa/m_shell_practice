@@ -90,6 +90,7 @@ int	main(int ac, char **av, char **env)
 			}
 			printf("end of cmds\n");
 			write(1, "------------------------------\n", 31);
+			free_cmds_list(cmds);
 			add_history(input.str);
 			free(input.str);
 			i = 0;

@@ -10,7 +10,7 @@ void	free_struct(t_node *cmd, char *str)
 	cmd->cmd_line = NULL;
 }
 
-void child_process(t_node *cmd, char *str)
+void	child_process(t_node *cmd, char *str)
 {
 	//cmd->cmd_line = cmd_init(str);
 	//cmd->file_path = build_path(cmd, cmd->cmd_line[0], env);
@@ -28,6 +28,7 @@ void child_process(t_node *cmd, char *str)
 		return ;
 }
 
+/*
 void process(t_node *cmd, char *str)
 {
 	pid_t	pid;
@@ -50,16 +51,15 @@ void process(t_node *cmd, char *str)
 		child_process(cmd, str);
 	}
 	return ;
-}
+}*/
 
-void	start_process(t_node *cmd)
+void	process(t_node *cmd, char *str)
 {
-	while (cmd)
+	if (cmd->cmd_line[0])
 	{
-		if (cmd->cmd_line[0])
-		{
-			if ((check_builtin(cmd->cmd_line) == TRUE))
-				start_builtin(cmd, cmd->cmd_line);
-		}
+		if ((check_builtin(cmd->cmd_line) == TRUE))
+			start_builtin(cmd, cmd->cmd_line);
+		else
+			child_process(cmd, str);
 	}
 }

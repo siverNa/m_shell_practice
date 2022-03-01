@@ -22,7 +22,7 @@ void	start_exit(void)
 
 void	built_exit(t_node *cmd, char **cmd_line)
 {
-	int ac;
+	int	ac;
 	int	exit_status;
 
 	ac = 0;

@@ -151,6 +151,13 @@ int		env_unset(char *line, char ***envs);
 void	built_unset(t_node *cmd, char **cmd_line);
 
 /*
+** builtin_exit.c
+*/
+int		isdigit_str(char *str);
+void	start_exit(void);
+void	built_exit(t_node *cmd, char **cmd_line);
+
+/*
 ** error_execute.c
 */
 int		print_error_msg(char *input, char *err_msg);

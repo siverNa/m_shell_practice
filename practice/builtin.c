@@ -31,7 +31,7 @@ int	start_builtin(t_node *cmd, char **cmd_line)
 	else if (!ft_strncmp(builtin, "unset", 5))
 		built_unset(cmd, cmd_line);
 	else if (!ft_strncmp(builtin, "exit", 4))
-		ft_putendl_fd("you type exit!", 1);
+		built_exit(cmd, cmd_line);
 	else
 		return (0);
 	return (1);

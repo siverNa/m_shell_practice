@@ -36,6 +36,7 @@ int	main(int ac, char **av, char **env)
 {
 	t_data			input;
 	t_node			*cmds;
+	t_node			*list;
 	int				i, k;
 	struct termios	org_term;
 	struct termios	new_term;
@@ -72,6 +73,7 @@ int	main(int ac, char **av, char **env)
 			}
 			write(1, "------------------------------\n", 31);
 			cmds = parse(input.tokens);
+			list = cmds;
 			if (cmds == NULL)
 				printf("cmds is NULL\n");
 			k = 0;
@@ -90,11 +92,9 @@ int	main(int ac, char **av, char **env)
 			}
 			printf("end of cmds\n");
 			write(1, "------------------------------\n", 31);
-			free_cmds_list(cmds);
-			add_history(input.str);
-			free(input.str);
-			i = 0;
-			input.str = NULL;
+			free_cmds_list(list);
+			list = NULL;
+			//add_history(input.str);
 		}
 	}
 	return (0);

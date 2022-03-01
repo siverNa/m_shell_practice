@@ -10,7 +10,7 @@ OBJS =		$(SRCS:.c=.o)
 
 $(NAME) :	$(OBJS)
 			@$(MAKE) bonus -C ../libft
-			$(CC) $^ -I . $(READLINE) $(LIBFT) -o $@
+			$(CC) $^ -g -I . $(READLINE) $(LIBFT) -o $@
 
 all :		$(NAME)
 

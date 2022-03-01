@@ -80,6 +80,6 @@ t_node   *parse(char **buf)
             i++;
         add_list_back(&list, new_node);
     }
-	free_tokens(input.tokens);
+	free_tokens(buf);
     return (list);
 }

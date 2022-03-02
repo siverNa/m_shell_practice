@@ -74,8 +74,8 @@ void	setting_signal(void);
 */
 void	free_struct(t_node *cmd, char *str);
 void	child_process(t_node *cmd, char *str);
+int		start_pipe(t_node *cmd, char *str)
 void	process(t_node *cmd, char *str);
-//void	start_process(t_node *cmd);
 
 /*
 ** cmd_init.c

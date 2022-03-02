@@ -12,8 +12,9 @@ void	free_struct(t_node *cmd, char *str)
 
 void	child_process(t_node *cmd, char *str)
 {
-	//cmd->cmd_line = cmd_init(str);
-	//cmd->file_path = build_path(cmd, cmd->cmd_line[0], env);
+	int	res;
+
+	res = 0;
 	if ((check_builtin(cmd->cmd_line) == TRUE))
 		start_builtin(cmd, cmd->cmd_line);
 	else if (execve(cmd->file_path, cmd->cmd_line, cmd->c_envs) == -1)
@@ -28,30 +29,18 @@ void	child_process(t_node *cmd, char *str)
 		return ;
 }
 
-/*
-void process(t_node *cmd, char *str)
+int	start_pipe(t_node *cmd, char *str)
 {
 	pid_t	pid;
+	int		status;
+	int		res;
 
+	res = 0;
 	pid = fork();
-	if (pid < 0)
-	{
-		ft_putstr_fd("fork error\n", 2);
-		exit(1);
-	}
-	else if (pid > 0)
-	{
-		//waitpid(pid, &cmd->status, WNOHANG);
-		wait(NULL);
-		return ;
-	}
-	else if (pid == 0)
-	{
-		//child_process(cmd, str, env);
+	if (pid == 0)
 		child_process(cmd, str);
-	}
-	return ;
-}*/
+	waitpid(pid, &status, 0);
+}
 
 void	process(t_node *cmd, char *str)
 {
@@ -60,6 +49,6 @@ void	process(t_node *cmd, char *str)
 		if ((check_builtin(cmd->cmd_line) == TRUE))
 			start_builtin(cmd, cmd->cmd_line);
 		else
-			child_process(cmd, str);
+			start_pipe(cmd, str);
 	}
 }

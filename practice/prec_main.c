@@ -34,8 +34,8 @@ void	setting_signal(void)
 
 int	main(int ac, char **av, char **env)
 {
-	t_node			cmd;
-	char			*str;
+	t_data			input;
+	t_node			*cmds;
 	int				i;
 	struct termios	org_term;
 	struct termios	new_term;
@@ -45,37 +45,45 @@ int	main(int ac, char **av, char **env)
 	new_term.c_lflag &= ~(ECHOCTL);
 	tcsetattr(STDIN_FILENO, TCSANOW, &new_term);
 	setting_signal();
-	cmd.c_envs = NULL;
-	cmd.c_envs = copy_envs(env);
+	input.env = NULL;
+	input.env = copy_envs(env);
 	while (1)
 	{
-		str = readline("\033[34;1mpractice : \033[0m");
-		if (!str)
+		input.str = readline("\033[34;1mpractice : \033[0m");
+		if (!(input.str))
 		{
 			printf("\033[1A");
 			printf("\033[10C");
 			printf(" exit\n");
 			exit(-1);
 		}
-		else if (*str == '\0')
-			free(str);
+		else if (*(input.str) == '\0')
+			free(input.str);
 		else
 		{
-			cmd.cmd_line = ft_split(str, ' ');
+			input.tokens = tokenize(input.str, input.env);
 			i = 0;
-			while (cmd.cmd_line[i])
-				printf("splited[%d] : %s\n", i++, cmd.cmd_line[i]);
+			while (input.tokens[i])
+			{
+				printf("tokenized:[%d] : %s\n", i, input.tokens[i]);
+				i++;
+			}
 			//cmd.cmd_line = cmd_init(str);
-			cmd.file_path = build_path(&cmd, cmd.cmd_line[0]);
-			process(&cmd, str);
-			add_history(str);
+			cmds = parse(input.tokens);
+			while (cmds != NULL)
+			{
+				cmds->file_path = build_path(cmds, cmds->cmd_line[0]);
+				process(cmds, input.str);
+				add_history(input.str);
+				cmds = cmds->next;
+			}
 			//free(str);
 			//free_cmdline(cmd.cmd_line);
 			//str = NULL;
-			free_struct(&cmd, str);
+			//free_struct(&cmd, str);
 		}
 	}
-	free_cmdline(cmd.c_envs);
+	//free_cmdline(cmd.c_envs);
 	return (0);
 }
 

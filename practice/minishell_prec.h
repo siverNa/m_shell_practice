@@ -34,6 +34,13 @@ typedef struct s_node
 	struct s_node	*next;
 }					t_node;
 
+typedef	struct s_data
+{
+	char	*str;
+	char	**tokens;
+	char	**env;
+}			t_data;
+
 typedef struct s_pars
 {
 	int				i;
@@ -171,5 +178,22 @@ char	**copy_envs(char **envs);
 char	*find_value(char *input, char **envs);
 int		arr_2dchar_len(char **str);
 char	*ft_strtok(char *str, char c);
+
+/*
+** free.c
+*/
+void	free_node_cmdline(t_node *node);
+void	free_cmds_list(t_node *list);
+void	free_tokens(char **token);
+
+/*
+** tokenize.c
+*/
+char	**tokenize(char *str, char **env);
+
+/*
+** parse.c
+*/
+t_node	*parse(char **buf);
 
 #endif

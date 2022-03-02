@@ -1,2 +1,3 @@
 a.out
-.o
+*.o
+minishell_prec

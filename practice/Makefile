@@ -3,7 +3,6 @@ NAME =		minishell_prec
 CC =		gcc
 CFLAGS =	-Wall -Wextra -Werror
 LIBFT =		-L../libft -lft
-READLINE =	-lreadline -L/home/linuxbrew/.linuxbrew/Cellar/readline/8.1.2/lib -I/home/linuxbrew/.linuxbrew/Cellar/readline/8.1.2/include
 G3 =		-g3 -fsanitize=address
 
 COMPILE_FLAG = -lreadline -L/$(HOME)/.brew/opt/readline/lib

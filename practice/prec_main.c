@@ -45,9 +45,11 @@ int	main(int ac, char **av, char **env)
 	new_term.c_lflag &= ~(ECHOCTL);
 	tcsetattr(STDIN_FILENO, TCSANOW, &new_term);
 	setting_signal();
+	cmd.c_envs = NULL;
+	cmd.c_envs = copy_envs(env);
 	while (1)
 	{
-		str = readline("practice : ");
+		str = readline("\033[34;1mpractice : \033[0m");
 		if (!str)
 		{
 			printf("\033[1A");
@@ -63,30 +65,24 @@ int	main(int ac, char **av, char **env)
 			i = 0;
 			while (cmd.cmd_line[i])
 				printf("splited[%d] : %s\n", i++, cmd.cmd_line[i]);
-			//process(&cmd, str, env);
-			if (!strcmp(cmd.cmd_line[0], "ls"))
-			{
-				if (execve("/usr/bin/ls", cmd.cmd_line, env) == -1)
-				{
-					ft_putstr_fd("practice : command not found: ", 2);
-					ft_putstr_fd(cmd.cmd_line[0], 2);
-					ft_putstr_fd("\n", 2);
-					free_struct(&cmd, str);
-					exit(1);
-				}
-			}
+			//cmd.cmd_line = cmd_init(str);
+			cmd.file_path = build_path(&cmd, cmd.cmd_line[0]);
+			process(&cmd, str);
 			add_history(str);
-			free(str);
-			free_cmdline(cmd.cmd_line);
-			str = NULL;
+			//free(str);
+			//free_cmdline(cmd.cmd_line);
+			//str = NULL;
+			free_struct(&cmd, str);
 		}
 	}
+	free_cmdline(cmd.c_envs);
 	return (0);
 }
 
 /*
  compile command
- gcc prec_main.c prec_process.c -lreadline 
+ gcc prec_main.c prec_process.c cmd_init.c cmd_case.c cmd_build_path.c builtin.c 
+builtin_cd.c builtin_pwd.c builtin_env.c builtin_export.c builtin_echo.c builtin_unset.c builtin_exit.c env_util.c error_execute.c -lreadline 
 -L/home/linuxbrew/.linuxbrew/Cellar/readline/8.1.2/lib 
 -I/home/linuxbrew/.linuxbrew/Cellar/readline/8.1.2/include -L../libft -lft 
 -g3 -fsanitize=address

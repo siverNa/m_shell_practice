@@ -6,14 +6,12 @@ LIBFT =		-L../libft -lft
 READLINE =	-lreadline -L/home/linuxbrew/.linuxbrew/Cellar/readline/8.1.2/lib -I/home/linuxbrew/.linuxbrew/Cellar/readline/8.1.2/include
 G3 =		-g3 -fsanitize=address
 
+COMPILE_FLAG = -lreadline -L/$(HOME)/.brew/opt/readline/lib
+OBJ_FLAG = -I/$(HOME)/.brew/opt/readline/include
 UNAME_S := $(shell uname -s)
 ifeq ($(UNAME_S),Linux)
 	COMPILE_FLAG = -lreadline -L/home/linuxbrew/.linuxbrew/Cellar/readline/8.1.2/lib
 	OBJ_FLAG = -I/home/linuxbrew/.linuxbrew/Cellar/readline/8.1.2/include
-endif
-ifeq ($(UNAME_S),DARWIN)
-	COMPILE_FLAG = -lreadline -L/$(HOME)/.brew/opt/readline/lib
-	OBJ_FLAG = -I/$(HOME)/.brew/opt/readline/include
 endif
 
 SRCS =		prec_main.c prec_process.c cmd_init.c cmd_case.c cmd_build_path.c \

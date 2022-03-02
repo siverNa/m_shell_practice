@@ -10,14 +10,14 @@ void	free_struct(t_node *cmd, char *str)
 	cmd->cmd_line = NULL;
 }
 
-void	child_process(t_node *cmd, char *str)
+void	child_process(t_node *cmd, t_data *input, char *str)
 {
 	int	res;
 
 	res = 0;
 	if ((check_builtin(cmd->cmd_line) == TRUE))
 		start_builtin(cmd, cmd->cmd_line);
-	else if (execve(cmd->file_path, cmd->cmd_line, cmd->c_envs) == -1)
+	else if (execve(cmd->file_path, cmd->cmd_line, input->env) == -1)
 	{
 		ft_putstr_fd("practice : command not found: ", 2);
 		ft_putstr_fd(cmd->cmd_line[0], 2);
@@ -29,7 +29,7 @@ void	child_process(t_node *cmd, char *str)
 		return ;
 }
 
-int	start_pipe(t_node *cmd, char *str)
+int	start_pipe(t_node *cmd, t_data *input, char *str)
 {
 	pid_t	pid;
 	int		status;
@@ -38,17 +38,17 @@ int	start_pipe(t_node *cmd, char *str)
 	res = 0;
 	pid = fork();
 	if (pid == 0)
-		child_process(cmd, str);
+		child_process(cmd, input, str);
 	waitpid(pid, &status, 0);
 }
 
-void	process(t_node *cmd, char *str)
+void	process(t_node *cmd, t_data *input, char *str)
 {
 	if (cmd->cmd_line[0])
 	{
 		if ((check_builtin(cmd->cmd_line) == TRUE))
 			start_builtin(cmd, cmd->cmd_line);
 		else
-			start_pipe(cmd, str);
+			start_pipe(cmd, input, str);
 	}
 }

@@ -225,6 +225,6 @@ char	**tokenize(char *str, char **env)
 		ret[i] = parse_token(str, &j, env);
 		i++;
 	}
-	free(str);
+	//free(str);
 	return (ret);
 }

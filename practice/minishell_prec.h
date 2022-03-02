@@ -80,9 +80,9 @@ void	setting_signal(void);
 **	prec_process.c
 */
 void	free_struct(t_node *cmd, char *str);
-void	child_process(t_node *cmd, char *str);
-int		start_pipe(t_node *cmd, char *str);
-void	process(t_node *cmd, char *str);
+void	child_process(t_node *cmd, t_data *input, char *str);
+int		start_pipe(t_node *cmd, t_data *input, char *str);
+void	process(t_node *cmd, t_data *input, char *str);
 
 /*
 ** cmd_init.c
@@ -104,8 +104,8 @@ void	case_space(char *str, char **result, t_pars *pars);
 ** cmd_build_path.c
 */
 void	free_2d_arr(char **str);
-void	catch_env_to_path(t_node *cmd);
-char	*build_path(t_node *cmd, char *cmd_line);
+void	catch_env_to_path(t_node *cmd, t_data *input);
+char	*build_path(t_node *cmd, t_data *input, char *cmd_line);
 
 /*
 ** builtin.c

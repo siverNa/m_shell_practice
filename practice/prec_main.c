@@ -78,9 +78,10 @@ int	main(int ac, char **av, char **env)
 					printf("cmds: %s\n", cmds->cmd_line[i]);
 					i++;
 				}
-				cmds->file_path = build_path(cmds, cmds->cmd_line[0]);
-				process(cmds, input.str);
+				cmds->file_path = build_path(cmds, &input, cmds->cmd_line[0]);
+				process(cmds, &input, input.str);
 				add_history(input.str);
+				free(input.str);
 				cmds = cmds->next;
 			}
 			//free(str);

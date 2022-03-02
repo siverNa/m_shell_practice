@@ -13,6 +13,7 @@ void	free_node_cmdline(t_node *node)
 		i++;
 	}
 	free(node->cmd_line);
+	free(node->file_path);
 	return ;
 }
 

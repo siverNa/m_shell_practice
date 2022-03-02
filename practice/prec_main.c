@@ -86,10 +86,6 @@ int	main(int ac, char **av, char **env)
 				free(input.str);
 				cmds = cmds->next;
 			}
-			//free(str);
-			//free_cmdline(cmd.cmd_line);
-			//str = NULL;
-			//free_struct(&cmd, str);
 			free_cmds_list(list);
 			list = NULL;
 		}

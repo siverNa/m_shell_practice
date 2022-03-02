@@ -1,4 +1,4 @@
-#include "minishell_prec.h"
+#include "../minishell_prec.h"
 
 void	add_export(char *str, char **new, int i)
 {

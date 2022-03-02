@@ -1,4 +1,4 @@
-#include "minishell_prec.h"
+#include "../minishell_prec.h"
 
 char	**parsing_str(char *str, char **result, t_pars *pars)
 {
@@ -20,7 +20,7 @@ char	**parsing_str(char *str, char **result, t_pars *pars)
 		pars->i++;
 		pars->j++; 
 	}
-	result[pars->j] = '\0';
+	result[pars->j] = 0;
 	return (result);
 }
 

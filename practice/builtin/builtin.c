@@ -1,4 +1,4 @@
-#include "minishell_prec.h"
+#include "../minishell_prec.h"
 
 int	check_builtin(char **cmd_line)
 {

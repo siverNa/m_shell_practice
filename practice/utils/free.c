@@ -1,4 +1,4 @@
-#include "minishell_prec.h"
+#include "../minishell_prec.h"
 
 void	free_node_cmdline(t_node *node)
 {

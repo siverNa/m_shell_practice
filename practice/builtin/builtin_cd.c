@@ -1,4 +1,4 @@
-#include "minishell_prec.h"
+#include "../minishell_prec.h"
 
 int	exec_cd_home(char *path, char **cmd_line, char **c_envs)
 {

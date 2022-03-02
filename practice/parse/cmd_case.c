@@ -1,4 +1,4 @@
-#include "minishell_prec.h"
+#include "../minishell_prec.h"
 
 int	word_len(const char *str, int i, char c)
 {

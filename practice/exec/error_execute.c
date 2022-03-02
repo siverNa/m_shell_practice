@@ -1,4 +1,4 @@
-#include "minishell_prec.h"
+#include "../minishell_prec.h"
 
 int	print_error_msg(char *input, char *err_msg)
 {

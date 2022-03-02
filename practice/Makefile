@@ -14,11 +14,11 @@ ifeq ($(UNAME_S),Linux)
 	OBJ_FLAG = -I/home/linuxbrew/.linuxbrew/Cellar/readline/8.1.2/include
 endif
 
-SRCS =		prec_main.c prec_process.c cmd_init.c cmd_case.c cmd_build_path.c \
-			builtin.c builtin_cd.c builtin_pwd.c builtin_env.c builtin_export.c \
-			builtin_echo.c builtin_unset.c builtin_exit.c \
-			env_util.c error_execute.c \
-			free.c parse.c tokenize.c
+SRCS =		prec_main.c exec/prec_process.c parse/cmd_init.c parse/cmd_case.c parse/cmd_build_path.c \
+			builtin/builtin.c builtin/builtin_cd.c builtin/builtin_pwd.c builtin/builtin_env.c builtin/builtin_export.c \
+			builtin/builtin_echo.c builtin/builtin_unset.c builtin/builtin_exit.c \
+			utils/env_util.c exec/error_execute.c \
+			utils/free.c parse/parse.c parse/tokenize.c
 
 OBJS =		$(SRCS:.c=.o)
 

@@ -1,4 +1,4 @@
-#include "minishell_prec.h"
+#include "../minishell_prec.h"
 
 char	**copy_envs(char **envs)
 {
@@ -14,7 +14,7 @@ char	**copy_envs(char **envs)
 	i = -1;
 	while (envs[++i])
 		new[i] = ft_strdup(envs[i]);
-	new[i] = '\0';
+	new[i] = 0;
 	return (new);
 }
 

@@ -36,6 +36,7 @@ int	main(int ac, char **av, char **env)
 {
 	t_data			input;
 	t_node			*cmds;
+	t_node			*list;
 	int				i;
 	struct termios	org_term;
 	struct termios	new_term;
@@ -70,6 +71,7 @@ int	main(int ac, char **av, char **env)
 			}
 			//cmd.cmd_line = cmd_init(str);
 			cmds = parse(input.tokens);
+			list = cmds;
 			while (cmds != NULL)
 			{
 				i = 0;
@@ -88,6 +90,8 @@ int	main(int ac, char **av, char **env)
 			//free_cmdline(cmd.cmd_line);
 			//str = NULL;
 			//free_struct(&cmd, str);
+			free_cmds_list(list);
+			list = NULL;
 		}
 	}
 	//free_cmdline(cmd.c_envs);

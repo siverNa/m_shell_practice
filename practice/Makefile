@@ -8,8 +8,7 @@ G3 =		-g3 -fsanitize=address
 
 UNAME_S := $(shell uname -s)
 ifeq ($(UNAME_S),Linux)
-
-	COMPILE_FLAG = -lreadline -L/home/linuxbrew/.linuxbrew/Cellar/readline/8.1.2/libe
+	COMPILE_FLAG = -lreadline -L/home/linuxbrew/.linuxbrew/Cellar/readline/8.1.2/lib
 	OBJ_FLAG = -I/home/linuxbrew/.linuxbrew/Cellar/readline/8.1.2/include
 endif
 ifeq ($(UNAME_S),DARWIN)

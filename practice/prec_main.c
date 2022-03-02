@@ -72,6 +72,12 @@ int	main(int ac, char **av, char **env)
 			cmds = parse(input.tokens);
 			while (cmds != NULL)
 			{
+				i = 0;
+				while (cmds->cmd_line[i] != NULL)
+				{
+					printf("cmds: %s\n", cmds->cmd_line[i]);
+					i++;
+				}
 				cmds->file_path = build_path(cmds, cmds->cmd_line[0]);
 				process(cmds, input.str);
 				add_history(input.str);

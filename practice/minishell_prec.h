@@ -119,7 +119,7 @@ void	add_export(char *str, char **new, int i);
 int		check_export(char *str, char ***envs);
 int		isvalid_export(char *input);
 void	print_export(char **envs);
-void	built_export(t_node *cmd, char **cmd_line);
+void	built_export(t_node *cmd, char **cmd_line, t_data *input);
 
 /*
 ** builtin_echo.c

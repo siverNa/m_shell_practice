@@ -28,9 +28,13 @@ int	check_export(char *str, char ***envs)
 		return (-1);
 	i = -1;
 	while ((*envs)[++i])
+	{
 		new[i] = ft_strdup((*envs)[i]);
+		free((*envs)[i]);
+	}
 	add_export(str, new, i);
 	//free_2d_arr(*envs);
+	free(*envs);
 	*envs = new;
 	return (1);
 }
@@ -62,7 +66,7 @@ void	print_export(char **envs)
 	}
 }
 
-void	built_export(t_node *cmd, char **cmd_line)
+void	built_export(t_node *cmd, char **cmd_line, t_data *input)
 {
 	int		i;
 	int		res;
@@ -72,7 +76,7 @@ void	built_export(t_node *cmd, char **cmd_line)
 	res = 0;
 	temp = cmd_line;
 	if (arr_2dchar_len(cmd_line) == 1)
-		print_export(cmd->c_envs);
+		print_export(input->env);
 	else
 	{
 		remove_char(cmd_line[1], '\'');
@@ -83,7 +87,7 @@ void	built_export(t_node *cmd, char **cmd_line)
 				print_identify_error_msg("export", temp[i]);
 			}
 			remove_char(cmd_line[i], '$');
-			res = check_export(cmd_line[i], &cmd->c_envs);
+			res = check_export(cmd_line[i], &input->env);
 		}
 	}
 }

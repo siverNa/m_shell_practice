@@ -50,26 +50,6 @@ typedef struct s_pars
 }					t_pars;
 
 /*
-typedef struct		s_deq
-{
-	int				size;
-	t_node			*head;
-	t_node			*tail;
-}					t_deq;
-*/
-
-/*
-** deque_func.c
-*/
-/*void	free_cmdline(char **cmdline);
-void	free_deq(t_deq *cmd);
-void	init_cmd(t_deq *deq);
-int		dq_is_empty(t_deq *d);
-void	lst_addend(t_deq *deq, char *str);
-void	insert_str(t_deq *deq, char *str);
-*/
-
-/*
 **	main.c
 */
 void	free_cmdline(char **cmdline);
@@ -111,7 +91,7 @@ char	*build_path(t_node *cmd, t_data *input, char *cmd_line);
 ** builtin.c
 */
 int		check_builtin(char **cmd_line);
-int		start_builtin(t_node *cmd, char **cmd_line);
+int		start_builtin(t_node *cmd, char **cmd_line, t_data *input);
 int		remove_char(char *str, char c);
 
 /*

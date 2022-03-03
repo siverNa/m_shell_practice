@@ -13,19 +13,19 @@ int	check_builtin(char **cmd_line)
 	return (FALSE);
 }
 
-int	start_builtin(t_node *cmd, char **cmd_line)
+int	start_builtin(t_node *cmd, char **cmd_line, t_data *input)
 {
 	char	*builtin;
 
 	builtin = cmd->cmd_line[0];
 	if (!ft_strncmp(builtin, "cd", 2))
-		built_cd(cmd_line, cmd->c_envs);
+		built_cd(cmd_line, input->env);
 	else if (!ft_strncmp(builtin, "echo", 4))
-		built_echo(cmd_line, cmd->c_envs);
+		built_echo(cmd_line, input->env);
 	else if (!ft_strncmp(builtin, "pwd", 3))
 		built_pwd();
 	else if (!ft_strncmp(builtin, "env", 3))
-		built_env(cmd->c_envs);
+		built_env(input->env);
 	else if (!ft_strncmp(builtin, "export", 6))
 		built_export(cmd, cmd_line);
 	else if (!ft_strncmp(builtin, "unset", 5))

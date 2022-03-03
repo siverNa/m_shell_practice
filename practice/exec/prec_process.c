@@ -14,7 +14,7 @@ void	child_process(t_node *cmd, t_data *input, char *str)
 
 	res = 0;
 	if ((check_builtin(cmd->cmd_line) == TRUE))
-		start_builtin(cmd, cmd->cmd_line);
+		start_builtin(cmd, cmd->cmd_line, input);
 	else if (execve(cmd->file_path, cmd->cmd_line, input->env) == -1)
 	{
 		ft_putstr_fd("practice : command not found: ", 2);
@@ -46,7 +46,7 @@ void	process(t_node *cmd, t_data *input, char *str)
 	if (cmd->cmd_line[0])
 	{
 		if ((check_builtin(cmd->cmd_line) == TRUE))
-			start_builtin(cmd, cmd->cmd_line);
+			start_builtin(cmd, cmd->cmd_line, input);
 		else
 			start_pipe(cmd, input, str);
 	}

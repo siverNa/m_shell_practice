@@ -66,5 +66,7 @@ char	*ft_strtok(char *str, char c)
 		}
 		stock++;
 	}
+	if (*stock == '\0')
+		free(stock);
 	return (p);
 }

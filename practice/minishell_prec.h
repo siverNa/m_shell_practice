@@ -135,7 +135,7 @@ void	built_echo(char **cmd_line, char **envs);
 int		isvalid_env(char *line);
 int		check_key_value(char *line, char *envs);
 int		env_unset(char *line, char ***envs);
-void	built_unset(t_node *cmd, char **cmd_line);
+void	built_unset(t_node *cmd, char **cmd_line, t_data *input);
 
 /*
 ** builtin_exit.c

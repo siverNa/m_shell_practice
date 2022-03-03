@@ -54,7 +54,7 @@ int	env_unset(char *line, char ***envs)
 	return (SUCCESS);
 }
 
-void	built_unset(t_node *cmd, char **cmd_line)
+void	built_unset(t_node *cmd, char **cmd_line, t_data *input)
 {
 	int	i;
 	int	res;
@@ -64,7 +64,7 @@ void	built_unset(t_node *cmd, char **cmd_line)
 	while (cmd_line[i])
 	{
 		remove_char(cmd_line[i], '\'');
-		res = isvalid_env(cmd_line[i]) && env_unset(cmd_line[i], &cmd->c_envs);
+		res = isvalid_env(cmd_line[i]) && env_unset(cmd_line[i], &input->env);
 		i++;
 	}
 }

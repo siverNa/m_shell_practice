@@ -19,6 +19,8 @@ int	is_option_n(char *str)
 {
 	int	i;
 
+	if (!str)
+		return (FALSE);
 	if (strncmp(str, "-n", 2) != 0)
 		return (FALSE);
 	i = 2;

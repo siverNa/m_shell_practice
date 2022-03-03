@@ -6,7 +6,7 @@ char	**copy_envs(char **envs)
 	int		i;
 
 	i = 0;
-	while (envs[i] != NULL)
+	while (envs[++i] != NULL)
 		i++;
 	new = malloc(sizeof(char *) * (i + 1));
 	if (!new)
@@ -14,7 +14,7 @@ char	**copy_envs(char **envs)
 	i = -1;
 	while (envs[++i])
 		new[i] = ft_strdup(envs[i]);
-	new[i] = 0;
+	new[i] = NULL;
 	return (new);
 }
 

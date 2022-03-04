@@ -2,7 +2,7 @@
 
 void	add_export(char *str, char **new, int i)
 {
-	new[i] = ft_strdup(str);
+	new[i] = ft_strdup(str);//메모리 누수 예상지점2
 	new[i + 1] = NULL;
 }
 
@@ -23,18 +23,17 @@ int	check_export(char *str, char ***envs)
 			return (1);
 		}
 	}
-	new = malloc(sizeof(char *) * (i + 2));
+	new = malloc(sizeof(char *) * (i + 2));//메모리누수 예상지점1
 	if (!new)
 		return (-1);
 	i = -1;
 	while ((*envs)[++i])
 	{
-		new[i] = ft_strdup((*envs)[i]);
+		new[i] = ft_strdup((*envs)[i]);//메모리 누수 예상 지점3
 		free((*envs)[i]);
 	}
 	add_export(str, new, i);
-	//free_2d_arr(*envs);
-	free(*envs);
+	free(*envs);//이건 맞는 free
 	*envs = new;
 	return (1);
 }

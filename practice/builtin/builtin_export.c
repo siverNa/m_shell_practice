@@ -74,6 +74,8 @@ void	built_export(t_node *cmd, char **cmd_line, t_data *input)
 	i = 0;
 	res = 0;
 	temp = cmd_line;
+	if (cmd->status == 1)
+		return ;
 	if (arr_2dchar_len(cmd_line) == 1)
 		print_export(input->env);
 	else
@@ -84,9 +86,12 @@ void	built_export(t_node *cmd, char **cmd_line, t_data *input)
 			if (isvalid_export(ft_strtok(temp[i], '=')) == FALSE)
 			{
 				print_identify_error_msg("export", temp[i]);
+				g_exit_status = 1;
 			}
 			remove_char(cmd_line[i], '$');
 			res = check_export(cmd_line[i], &input->env);
 		}
 	}
+	if (res != 1)
+		g_exit_status = 1;
 }

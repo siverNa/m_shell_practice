@@ -1,5 +1,7 @@
 #include "minishell_prec.h"
 
+int g_exit_status = 0;
+
 void	free_cmdline(char **cmdline)
 {
 	int	i;
@@ -91,5 +93,5 @@ int	main(int ac, char **av, char **env)
 		}
 	}
 	//free_cmdline(cmd.c_envs);
-	return (0);
+	return (g_exit_status & 255);
 }

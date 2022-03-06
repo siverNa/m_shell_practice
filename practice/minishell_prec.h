@@ -22,6 +22,8 @@
 # define SUCCESS	1
 # define ERROR		-1
 
+extern int			g_exit_status;
+
 typedef struct s_node
 {
 	char			**cmd_line;
@@ -34,7 +36,7 @@ typedef struct s_node
 	struct s_node	*next;
 }					t_node;
 
-typedef	struct s_data
+typedef struct s_data
 {
 	char	*str;
 	char	**tokens;

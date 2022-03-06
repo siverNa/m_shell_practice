@@ -2,7 +2,7 @@
 
 void	echo_exit_status(void)
 {
-	ft_putstr_fd(ft_itoa(0), 1);//exit_status 변수 설정 필요
+	ft_putstr_fd(ft_itoa(g_exit_status), 1);
 }
 
 void	echo_envs(char **cmd_line, char **envs, int i)

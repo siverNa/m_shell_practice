@@ -47,10 +47,7 @@ void	built_echo(char **cmd_line, char **envs)
 	{
 		if (cmd_line[i][0] == '\'')
 			res = remove_char(cmd_line[i], '\'');
-		if (cmd_line[i][0] == '$' && res != TRUE)
-			echo_envs(cmd_line, envs, i);
-		else
-			ft_putstr_fd(cmd_line[i], 1);
+		ft_putstr_fd(cmd_line[i], 1);
 		if (cmd_line[i + 1] != NULL)
 			ft_putchar_fd(' ', 1);
 		i++;

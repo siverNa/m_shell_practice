@@ -50,30 +50,30 @@ void	concat_char(char **str, char c)
 
 int	process_env(char *str, int j, char **token, char **env)
 {
-	printf(">>>entered process_env<<<\n");
 	char	*var_name;
 	char	*value;
 	int		k;
 
 	j++;
 	var_name = NULL;
+	if (str[j] == 0 || str[j] == ' ')
+	{
+		concat_char(token, '$');
+		return(j);
+	}
 	while (ft_isalpha(str[j]) || str[j] == '_')
 	{
 		concat_char(&var_name, str[j]);
 		j++;
 	}
-	printf("var_name: [%s]\n", var_name);
 	value = find_value(var_name, env);
-	printf("value: [%s]\n", value);
 	k = 0;
 	while(value[k])
 	{
 		concat_char(token, value[k]);
 		k++;
 	}
-	printf("freeing var_name\n");
 	free(var_name);
-	printf(">>>exiting process_env<<<\n");
 	return (j);
 }
 
@@ -124,6 +124,32 @@ int	process_squote(char *str, int j, char **token)
 	return (j);
 }
 
+int	process_redir(char *str, int j, char **token, char **env)
+{
+	if (str[j] == '<')
+	{
+		concat_char(token, '<');
+		j++;
+		if (str[j] == '<')
+		{
+			concat_char(token, '<');
+			j++;
+		}
+		return (j);
+	}
+	else
+	{
+		concat_char(token, '>');
+		j++;
+		if (str[j] == '>')
+		{
+			concat_char(token, '>');
+			j++;
+		}
+		return (j);
+	}
+}
+
 char	*parse_token(char *str, int *j, char **env)
 {
 	char	*token;
@@ -136,6 +162,11 @@ char	*parse_token(char *str, int *j, char **env)
 	{
 		concat_char(&token, '|');
 		(*j)++;
+		return (token);
+	}
+	if (str[*j] == '<' || str[*j] == '>')
+	{
+		*j = process_redir(str, *j, &token, env);
 		return (token);
 	}
 	while (str[*j] && str[*j] != ' ' && str[*j] != '|')
@@ -190,6 +221,13 @@ int	count_tokens(char *str)
 		{
 			count++;
 			status = 0;
+		}
+		else if (str[i] == '<' || str[i] == '>')
+		{
+			count++;
+			status = 0;
+			if ((str[i] == '<' && str[i + 1] == '<') || (str[i] == '>' && str[i + 1] == '>'))
+				i++;
 		}
 		else if (str[i] == '\"' || str[i] == '\'')
 		{

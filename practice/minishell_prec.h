@@ -30,14 +30,23 @@ typedef struct s_node
 	char			**c_envs;
 	int				fd[2];
 	int				status;
+	int				redir;
+	int				start;
+	int				last;
 	struct s_node	*prev;
 	struct s_node	*next;
 }					t_node;
 
+typedef struct s_token
+{
+	char	*value;
+	int		type;
+}			t_token;
+
 typedef	struct s_data
 {
 	char	*str;
-	char	**tokens;
+	t_token	*tokens;
 	char	**env;
 }			t_data;
 
@@ -184,16 +193,21 @@ char	*ft_strtok(char *str, char c);
 */
 void	free_node_cmdline(t_node *node);
 void	free_cmds_list(t_node *list);
-void	free_tokens(char **token);
+void	free_tokens(t_token *token);
 
 /*
 ** tokenize.c
 */
-char	**tokenize(char *str, char **env);
+t_token	*tokenize(char *str, char **env);
 
 /*
 ** parse.c
 */
-t_node	*parse(char **buf);
+t_node	*parse(t_token *tokens);
+
+/*
+** utils.c
+*/
+int ft_strcmp(char *s1, char *s2);
 
 #endif

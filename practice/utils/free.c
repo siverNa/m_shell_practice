@@ -40,14 +40,14 @@ void	free_cmds_list(t_node *list)
 	return ;
 }
 
-void	free_tokens(char **token)
+void	free_tokens(t_token *token)
 {
 	int	i;
 
 	i = 0;
-	while (token[i] != NULL)
+	while (token[i].value != NULL)
 	{
-		free(token[i]);
+		free(token[i].value);
 		i++;
 	}
 	free(token);

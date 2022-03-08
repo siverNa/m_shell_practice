@@ -74,6 +74,7 @@ t_node   *parse(char **buf)
 		}
         new_node->cmd_line[k] = NULL;
         new_node->next = NULL;
+        new_node->status = 0;
         if (ft_strcmp(buf[i], "|"))
             new_node->status = 1;
         if (buf[i] != NULL)

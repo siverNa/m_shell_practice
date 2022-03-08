@@ -62,7 +62,7 @@ void	setting_signal(void);
 **	prec_process.c
 */
 void	free_struct(t_node *cmd);
-void	child_process(t_node *cmd, t_data *input, char *str);
+void	child_process(t_node *cmd, t_data *input, char *str, t_node *n_cmd);
 int		start_pipe(t_node *cmd, t_data *input, char *str);
 void	process(t_node *cmd, t_data *input, char *str);
 
@@ -149,6 +149,7 @@ void	built_exit(t_node *cmd, char **cmd_line);
 /*
 ** error_execute.c
 */
+int		print_exe_error_msg(t_node *cmd, char *str);
 int		print_error_msg(char *input, char *err_msg);
 int		print_error_msg_2(char *first, char *sec, char *err_msg);
 void	print_identify_error_msg(char *first, char *sec);

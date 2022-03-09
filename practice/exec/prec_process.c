@@ -30,7 +30,7 @@ void	child_process(t_node *cmd, t_data *input, char *str, t_node *n_cmd)
 	if ((check_builtin(cmd->cmd_line) == TRUE))
 		start_builtin(cmd, cmd->cmd_line, input);
 	else
-		res = execve(cmd->file_path, cmd->cmd_line, input->env);
+		res = execve(path, cmd->cmd_line, input->env);
 	if (res == -1)
 		print_exe_error_msg(cmd, str);
 	exit(res);

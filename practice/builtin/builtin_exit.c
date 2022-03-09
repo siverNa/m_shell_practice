@@ -25,7 +25,7 @@ void	built_exit(t_node *cmd, char **cmd_line)
 	int	ac;
 
 	ac = 0;
-	if (cmd->status == 1)
+	if (cmd->pre_status == 1)
 		return ;
 	while (cmd_line[ac] != NULL)
 		ac++;

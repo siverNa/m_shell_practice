@@ -34,6 +34,7 @@ typedef struct s_node
 	int				fd_in;
 	int				fd_out;
 	int				status;
+	int				pre_status;
 	int				redir;
 	int				start;
 	int				last;

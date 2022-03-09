@@ -12,8 +12,10 @@ void	free_node_cmdline(t_node *node)
 		free(node->cmd_line[i]);
 		i++;
 	}
-	free(node->cmd_line);
-	free(node->file_path);
+	printf("cmd_line tokens are freed!\n");
+	//free(node->cmd_line);
+	//free(node->file_path);
+	printf("exiting free_node_cmdline\n");
 	return ;
 }
 

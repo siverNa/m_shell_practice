@@ -65,15 +65,19 @@ void	process(t_node *cmd, t_data *input, char *str)
 {
 	while (cmd != NULL)
 	{
+
 		if (cmd->cmd_line[0])
-		{	
+		{
+			printf("CMD_LINE: ");
+			int i = 0;
+			while (cmd->cmd_line[i])
+				printf("[%s]", cmd->cmd_line[i++]);
+			printf("\n");
 			if ((check_builtin(cmd->cmd_line) == TRUE) && cmd->status == 0)
 				start_builtin(cmd, cmd->cmd_line, input);
 			else
 			{
 				start_pipe(cmd, input, str);
-				if (cmd->next != NULL)
-					cmd = cmd->next;
 			}
 		}
 		cmd = cmd->next;

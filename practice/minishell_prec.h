@@ -22,6 +22,8 @@
 # define SUCCESS	1
 # define ERROR		-1
 
+extern int			g_exit_status;
+
 typedef struct s_node
 {
 	char			**cmd_line;
@@ -59,26 +61,6 @@ typedef struct s_pars
 }					t_pars;
 
 /*
-typedef struct		s_deq
-{
-	int				size;
-	t_node			*head;
-	t_node			*tail;
-}					t_deq;
-*/
-
-/*
-** deque_func.c
-*/
-/*void	free_cmdline(char **cmdline);
-void	free_deq(t_deq *cmd);
-void	init_cmd(t_deq *deq);
-int		dq_is_empty(t_deq *d);
-void	lst_addend(t_deq *deq, char *str);
-void	insert_str(t_deq *deq, char *str);
-*/
-
-/*
 **	main.c
 */
 void	free_cmdline(char **cmdline);
@@ -89,7 +71,7 @@ void	setting_signal(void);
 **	prec_process.c
 */
 void	free_struct(t_node *cmd);
-void	child_process(t_node *cmd, t_data *input, char *str);
+void	child_process(t_node *cmd, t_data *input, char *str, t_node *n_cmd);
 int		start_pipe(t_node *cmd, t_data *input, char *str);
 void	process(t_node *cmd, t_data *input, char *str);
 
@@ -120,7 +102,7 @@ char	*build_path(t_node *cmd, t_data *input, char *cmd_line);
 ** builtin.c
 */
 int		check_builtin(char **cmd_line);
-int		start_builtin(t_node *cmd, char **cmd_line);
+int		start_builtin(t_node *cmd, char **cmd_line, t_data *input);
 int		remove_char(char *str, char c);
 
 /*
@@ -148,7 +130,7 @@ void	add_export(char *str, char **new, int i);
 int		check_export(char *str, char ***envs);
 int		isvalid_export(char *input);
 void	print_export(char **envs);
-void	built_export(t_node *cmd, char **cmd_line);
+void	built_export(t_node *cmd, char **cmd_line, t_data *input);
 
 /*
 ** builtin_echo.c
@@ -164,7 +146,7 @@ void	built_echo(char **cmd_line, char **envs);
 int		isvalid_env(char *line);
 int		check_key_value(char *line, char *envs);
 int		env_unset(char *line, char ***envs);
-void	built_unset(t_node *cmd, char **cmd_line);
+void	built_unset(t_node *cmd, char **cmd_line, t_data *input);
 
 /*
 ** builtin_exit.c
@@ -176,6 +158,7 @@ void	built_exit(t_node *cmd, char **cmd_line);
 /*
 ** error_execute.c
 */
+int		print_exe_error_msg(t_node *cmd, char *str);
 int		print_error_msg(char *input, char *err_msg);
 int		print_error_msg_2(char *first, char *sec, char *err_msg);
 void	print_identify_error_msg(char *first, char *sec);

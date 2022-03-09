@@ -2,7 +2,7 @@
 
 void	add_export(char *str, char **new, int i)
 {
-	new[i] = ft_strdup(str);
+	new[i] = ft_strdup(str);//메모리 누수 예상지점2
 	new[i + 1] = NULL;
 }
 
@@ -18,18 +18,22 @@ int	check_export(char *str, char ***envs)
 	{
 		if (!ft_strncmp((*envs)[i], str, ft_strlen(str)))
 		{
+			free((*envs)[i]);
 			(*envs)[i] = ft_strdup(str);
 			return (1);
 		}
 	}
-	new = malloc(sizeof(char *) * (i + 2));
+	new = malloc(sizeof(char *) * (i + 2));//메모리누수 예상지점1
 	if (!new)
 		return (-1);
 	i = -1;
 	while ((*envs)[++i])
-		new[i] = ft_strdup((*envs)[i]);
+	{
+		new[i] = ft_strdup((*envs)[i]);//메모리 누수 예상 지점3
+		free((*envs)[i]);
+	}
 	add_export(str, new, i);
-	//free_2d_arr(*envs);
+	free(*envs);//이건 맞는 free
 	*envs = new;
 	return (1);
 }
@@ -61,7 +65,7 @@ void	print_export(char **envs)
 	}
 }
 
-void	built_export(t_node *cmd, char **cmd_line)
+void	built_export(t_node *cmd, char **cmd_line, t_data *input)
 {
 	int		i;
 	int		res;
@@ -70,8 +74,10 @@ void	built_export(t_node *cmd, char **cmd_line)
 	i = 0;
 	res = 0;
 	temp = cmd_line;
+	if (cmd->status == 1)
+		return ;
 	if (arr_2dchar_len(cmd_line) == 1)
-		print_export(cmd->c_envs);
+		print_export(input->env);
 	else
 	{
 		remove_char(cmd_line[1], '\'');
@@ -80,9 +86,12 @@ void	built_export(t_node *cmd, char **cmd_line)
 			if (isvalid_export(ft_strtok(temp[i], '=')) == FALSE)
 			{
 				print_identify_error_msg("export", temp[i]);
+				g_exit_status = 1;
 			}
 			remove_char(cmd_line[i], '$');
-			res = check_export(cmd_line[i], &cmd->c_envs);
+			res = check_export(cmd_line[i], &input->env);
 		}
 	}
+	if (res != 1)
+		g_exit_status = 1;
 }

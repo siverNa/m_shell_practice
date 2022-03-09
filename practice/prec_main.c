@@ -1,5 +1,7 @@
 #include "minishell_prec.h"
 
+int g_exit_status = 0;
+
 void	free_cmdline(char **cmdline)
 {
 	int	i;
@@ -91,14 +93,5 @@ int	main(int ac, char **av, char **env)
 		}
 	}
 	//free_cmdline(cmd.c_envs);
-	return (0);
+	return (g_exit_status & 255);
 }
-
-/*
- compile command
- gcc prec_main.c prec_process.c cmd_init.c cmd_case.c cmd_build_path.c builtin.c 
-builtin_cd.c builtin_pwd.c builtin_env.c builtin_export.c builtin_echo.c builtin_unset.c builtin_exit.c env_util.c error_execute.c -lreadline 
--L/home/linuxbrew/.linuxbrew/Cellar/readline/8.1.2/lib 
--I/home/linuxbrew/.linuxbrew/Cellar/readline/8.1.2/include -L../libft -lft 
--g3 -fsanitize=address
-*/

@@ -14,7 +14,7 @@ char	**copy_envs(char **envs)
 	i = -1;
 	while (envs[++i])
 		new[i] = ft_strdup(envs[i]);
-	new[i] = 0;
+	new[i] = NULL;
 	return (new);
 }
 
@@ -66,5 +66,7 @@ char	*ft_strtok(char *str, char c)
 		}
 		stock++;
 	}
+	if (*stock == '\0')
+		free(stock);
 	return (p);
 }

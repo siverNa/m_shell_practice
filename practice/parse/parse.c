@@ -50,7 +50,7 @@ t_node   *parse(t_token *tokens)
 		}
         new_node->cmd_line[k] = NULL;
         new_node->next = NULL;
-
+        new_node->status = 0;
 		//parse command
 		if (tokens[i].type == 2)
 			new_node->redir = 1;

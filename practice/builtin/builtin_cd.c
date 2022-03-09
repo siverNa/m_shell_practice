@@ -3,7 +3,10 @@
 int	exec_cd_home(char *path, char **cmd_line, char **c_envs)
 {
 	if (cmd_line[1][1] == '~')
+	{
 		print_error_msg_2("cd", cmd_line[1], "No such file or directory");
+		g_exit_status = 1;
+	}
 	path = find_value("HOME", c_envs);
 	if (chdir(path) == -1)
 		print_error_msg("cd", "fail move HOME");
@@ -55,5 +58,7 @@ void	built_cd(char **cmd_line, char **c_envs)
 	else if (cmd_line[1][0] == '$')
 		exec_cd_envs(path, cmd_line, c_envs);
 	if (res == -1)
-		ft_putendl_fd("error", 2);
+		g_exit_status = 1;
+	else
+		g_exit_status = 0;
 }

@@ -184,6 +184,23 @@ void	free_tokens(t_token *token);
 ** tokenize.c
 */
 t_token	*tokenize(char *str, char **env);
+int	count_tokens(char *str);
+void	handle_count(int *status, int flag, int *count);
+int	parse_token(t_token *token, char *str, int *j, char **env);
+
+/*
+** tokenize_process.c
+*/
+int	process_redir(char *str, int j, char **token, char **env);
+int	process_squote(char *str, int j, char **token);
+int	process_dquote(char *str, int j, char **token, char **env);
+int	process_env(char *str, int j, char **token, char **env);
+
+/*
+** tokenize_utils.c
+*/
+void	concat_char(char **str, char c);
+int	check_quote(char *str, int i, char quote);
 
 /*
 ** parse.c

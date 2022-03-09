@@ -66,9 +66,9 @@ int	main(int ac, char **av, char **env)
 		{
 			input.tokens = tokenize(input.str, input.env);
 			i = 0;
-			while (input.tokens[i])
+			while (input.tokens[i].value)
 			{
-				printf("tokenized:[%d] : %s\n", i, input.tokens[i]);
+				printf("tokenized:[%d] : %s\n", i, input.tokens[i].value);
 				i++;
 			}
 			//cmd.cmd_line = cmd_init(str);

@@ -66,28 +66,23 @@ int	main(int ac, char **av, char **env)
 		{
 			input.tokens = tokenize(input.str, input.env);
 			i = 0;
-			while (input.tokens[i].value)
+			while (input.tokens[i])
 			{
-				printf("tokenized:[%d] : %s\n", i, input.tokens[i].value);
+				printf("tokenized:[%d] : %s\n", i, input.tokens[i]);
 				i++;
 			}
 			//cmd.cmd_line = cmd_init(str);
 			cmds = parse(input.tokens);
 			list = cmds;
-			while (cmds != NULL)
-			{
-				i = 0;
-				while (cmds->cmd_line[i] != NULL)
-				{
-					printf("cmds: %s\n", cmds->cmd_line[i]);
-					i++;
-				}
-				cmds->file_path = build_path(cmds, &input, cmds->cmd_line[0]);
+			//while (cmds != NULL)
+			//{
+				//printf("ENTER NEW COMMAND\n");
+				//cmds->file_path = build_path(cmds, &input, cmds->cmd_line[0]);
 				process(cmds, &input, input.str);
 				add_history(input.str);
 				free(input.str);
-				cmds = cmds->next;
-			}
+				//cmds = cmds->next;
+			//}
 			free_cmds_list(list);
 			list = NULL;
 		}

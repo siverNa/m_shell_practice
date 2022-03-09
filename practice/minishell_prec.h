@@ -31,6 +31,8 @@ typedef struct s_node
 	char			*temp_path;
 	char			**c_envs;
 	int				fd[2];
+	int				fd_in;
+	int				fd_out;
 	int				status;
 	int				redir;
 	int				start;

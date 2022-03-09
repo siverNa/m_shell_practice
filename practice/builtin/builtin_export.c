@@ -74,7 +74,7 @@ void	built_export(t_node *cmd, char **cmd_line, t_data *input)
 	i = 0;
 	res = 0;
 	temp = cmd_line;
-	if (cmd->status == 1)
+	if (cmd->pre_status == 1)
 		return ;
 	if (arr_2dchar_len(cmd_line) == 1)
 		print_export(input->env);

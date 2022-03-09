@@ -61,6 +61,8 @@ void	built_unset(t_node *cmd, char **cmd_line, t_data *input)
 
 	i = 1;
 	res = 0;
+	if (cmd->pre_status == 1)
+		return ;
 	while (cmd_line[i])
 	{
 		remove_char(cmd_line[i], '\'');

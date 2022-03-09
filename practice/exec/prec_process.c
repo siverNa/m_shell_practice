@@ -48,6 +48,7 @@ int	start_pipe(t_node *cmd, t_data *input, char *str)
 	if (cmd->status == 1)
 	{
 		n_cmd = cmd->next;
+		n_cmd-> pre_status = 1;
 		printf("%s\n", n_cmd->cmd_line[0]);
 		pipe(n_cmd->fd);
 	}

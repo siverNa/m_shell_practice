@@ -21,8 +21,13 @@ void	set_redir_fd(char *redir, char *filename, int *fd_in, int *fd_out)
 		*fd_in = open(filename, O_RDONLY);
 	}
 	else
-		;
-	//<<: read from input until delimiter
+	{
+		//<< (heredocument) read from stdin until delimiter(=filename) is found
+		//step1. create a temporary file
+		//step2. readline -> write to temporary file line by line
+		//step3. if the line == delimiter, stop writing
+		//step4. set fd_in to the file created
+	}
 }
 
 int	redirect(t_data *input, t_cmd *cmd)

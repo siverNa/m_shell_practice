@@ -1,5 +1,7 @@
 #include "minishell_prec.h"
 
+int g_exit_status = 0;
+
 void	free_cmdline(char **cmdline)
 {
 	int	i;
@@ -64,41 +66,27 @@ int	main(int ac, char **av, char **env)
 		{
 			input.tokens = tokenize(input.str, input.env);
 			i = 0;
-			while (input.tokens[i].value)
+			while (input.tokens[i])
 			{
-				printf("tokenized:[%d] : %s\n", i, input.tokens[i].value);
+				printf("tokenized:[%d] : %s\n", i, input.tokens[i]);
 				i++;
 			}
 			//cmd.cmd_line = cmd_init(str);
 			cmds = parse(input.tokens);
 			list = cmds;
-			while (cmds != NULL)
-			{
-				i = 0;
-				while (cmds->cmd_line[i] != NULL)
-				{
-					printf("cmds: %s\n", cmds->cmd_line[i]);
-					i++;
-				}
-				cmds->file_path = build_path(cmds, &input, cmds->cmd_line[0]);
+			//while (cmds != NULL)
+			//{
+				//printf("ENTER NEW COMMAND\n");
+				//cmds->file_path = build_path(cmds, &input, cmds->cmd_line[0]);
 				process(cmds, &input, input.str);
 				add_history(input.str);
 				free(input.str);
-				cmds = cmds->next;
-			}
+				//cmds = cmds->next;
+			//}
 			free_cmds_list(list);
 			list = NULL;
 		}
 	}
 	//free_cmdline(cmd.c_envs);
-	return (0);
+	return (g_exit_status & 255);
 }
-
-/*
- compile command
- gcc prec_main.c prec_process.c cmd_init.c cmd_case.c cmd_build_path.c builtin.c 
-builtin_cd.c builtin_pwd.c builtin_env.c builtin_export.c builtin_echo.c builtin_unset.c builtin_exit.c env_util.c error_execute.c -lreadline 
--L/home/linuxbrew/.linuxbrew/Cellar/readline/8.1.2/lib 
--I/home/linuxbrew/.linuxbrew/Cellar/readline/8.1.2/include -L../libft -lft 
--g3 -fsanitize=address
-*/

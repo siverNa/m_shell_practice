@@ -15,18 +15,16 @@ void	child_process(t_node *cmd, t_data *input, char *str, t_node *n_cmd)
 
 	res = 0;
 	path = build_path(cmd, input, cmd->cmd_line[0]);
-	/*if (cmd->status == 1)
+	if (cmd->status == 1)
 	{
-		if (dup2(n_cmd->fd[1], STDOUT) == -1)
-			exit(-1);
+		dup2(n_cmd->fd[1], STDOUT);
 		close(n_cmd->fd[1]);
 	}
 	if (cmd->fd[0] != 0)
 	{
-		if (dup2(cmd->fd[0], STDIN) == -1)
-			exit(-1);
+		dup2(cmd->fd[0], STDIN);
 		close(cmd->fd[0]);
-	}*/
+	}
 	if ((check_builtin(cmd->cmd_line) == TRUE))
 		start_builtin(cmd, cmd->cmd_line, input);
 	else

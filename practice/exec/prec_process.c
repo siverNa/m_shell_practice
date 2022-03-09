@@ -44,6 +44,7 @@ int	start_pipe(t_node *cmd, t_data *input, char *str)
 	t_node	*n_cmd;
 
 	res = 0;
+	n_cmd = cmd;
 	if (cmd->status == 1)
 	{
 		n_cmd = cmd->next;

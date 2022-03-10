@@ -97,11 +97,6 @@ void	process(t_node *cmd, t_data *input, char *str)
 					start_builtin(cmd, cmd->cmd_line, input);
 				else
 					builtin_redir_nopipe(cmd, input);
-				/*
-				redirect(input, cmd);
-				start_builtin(cmd, cmd->cmd_line, input);
-				printf("fd_in %d fd_out %d\n", cmd->fd_in, cmd->fd_out);
-				*/
 			}
 			else
 				start_pipe(cmd, input, str);

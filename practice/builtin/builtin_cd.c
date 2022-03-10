@@ -68,14 +68,32 @@ void	built_cd(char **cmd_line, char **c_envs)
 		g_exit_status = 0;
 }*/
 
-void	built_cd(char **cmd_line, char **c_envs)
+int	built_cd(char **cmd_line, char **c_envs)
+{
+	int		i;
+
+	i = -1;
+	if (arr_2dchar_len(cmd_line) == 1 || cmd_line[1][0] == '~')
+	{
+		while (c_envs[++i])
+		{
+			if (check_env("HOME=", c_envs[i]))
+				return (start_cd(c_envs[i] + 5, c_envs));
+		}
+		return (start_cd(c_envs[i] + 5, c_envs));
+	}
+	else
+		return (start_cd(cmd_line[1], c_envs));
+}
+
+int	start_cd(char *input, char **c_envs)
 {
 	int		res;
 	char	*path;
 	char	*ch_path;
 	char	*old_pwd;
 
-	res = chdir(cmd_line[1]);
+	res = chdir(input);
 	if (res == 0)
 	{
 		path = malloc(sizeof(char) * 1024);
@@ -93,6 +111,6 @@ void	built_cd(char **cmd_line, char **c_envs)
 		free(old_pwd);
 	}
 	else
-		g_exit_status = 1;
-	g_exit_status = 0;
+		return (ERROR);
+	return (SUCCESS);
 }

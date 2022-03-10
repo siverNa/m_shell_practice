@@ -115,7 +115,8 @@ int		remove_char(char *str, char c);
 //int		exec_cd_envs(char *path, char **cmd_line, char **c_envs);
 //void	set_pwd(char **c_envs);
 //void	built_cd(char **cmd_line, char **envs);
-void	built_cd(char **cmd_line, char **c_envs);
+int		built_cd(char **cmd_line, char **c_envs);
+int 	start_cd(char *input, char **c_envs);
 
 /*
 ** builtin_pwd.c

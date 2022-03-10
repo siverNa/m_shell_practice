@@ -2,25 +2,20 @@
 
 void	free_node_cmdline(t_node *node)
 {
-	printf(">free cmd<\n");
 	int	i;
 
 	i = 0;
 	while (node->cmd_line[i] != NULL)
 	{
-		printf("free cmd[%d]: [%s]\n", i, node->cmd_line[i]);
 		free(node->cmd_line[i]);
 		i++;
 	}
-	printf("cmd_line tokens are freed!\n");
 	free(node->cmd_line);
-	printf("exiting free_node_cmdline\n");
 	return ;
 }
 
 void	free_cmds_list(t_node *list)
 {
-	printf("entered free list\n");
 	t_node	*cur;
 	t_node	*temp;
 
@@ -37,7 +32,6 @@ void	free_cmds_list(t_node *list)
 		cur = cur->next;
 		free(temp);
 	}
-	printf("exiting free list\n");
 	return ;
 }
 

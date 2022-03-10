@@ -1,14 +1,12 @@
-#include "minishell_prec.h"
+#include "../minishell_prec.h"
 
 void	free_node_cmdline(t_node *node)
 {
-	printf(">free cmd<\n");
 	int	i;
 
 	i = 0;
 	while (node->cmd_line[i] != NULL)
 	{
-		printf("free cmd[%d]: [%s]\n", i, node->cmd_line[i]);
 		free(node->cmd_line[i]);
 		i++;
 	}
@@ -18,7 +16,6 @@ void	free_node_cmdline(t_node *node)
 
 void	free_cmds_list(t_node *list)
 {
-	printf("entered free list\n");
 	t_node	*cur;
 	t_node	*temp;
 
@@ -35,18 +32,17 @@ void	free_cmds_list(t_node *list)
 		cur = cur->next;
 		free(temp);
 	}
-	printf("exiting free list\n");
 	return ;
 }
 
-void	free_tokens(char **token)
+void	free_tokens(t_token *token)
 {
 	int	i;
 
 	i = 0;
-	while (token[i] != NULL)
+	while (token[i].value != NULL)
 	{
-		free(token[i]);
+		free(token[i].value);
 		i++;
 	}
 	free(token);

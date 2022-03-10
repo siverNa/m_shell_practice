@@ -1,4 +1,4 @@
-#include "minishell_prec.h"
+#include "../minishell_prec.h"
 
 char	**copy_envs(char **envs)
 {
@@ -14,7 +14,7 @@ char	**copy_envs(char **envs)
 	i = -1;
 	while (envs[++i])
 		new[i] = ft_strdup(envs[i]);
-	new[i] = '\0';
+	new[i] = NULL;
 	return (new);
 }
 
@@ -45,20 +45,20 @@ char	*ft_strtok(char *str, char c)
 {
 	static char	*stock = NULL;
 	char		*p;
-	int			i;
+	int			status;
 
-	i = 0;
+	status = 0;
 	p = NULL;
 	if (str != NULL)
 		stock = ft_strdup(str);
 	while (*stock != '\0')
 	{
-		if (i == 0 && *stock != c)
+		if (status == 0 && *stock != c)
 		{
-			i = 1;
+			status = 1;
 			p = stock;
 		}
-		else if (i == 1 && *stock == c)
+		else if (status == 1 && *stock == c)
 		{
 			*stock = '\0';
 			stock += 1;
@@ -66,5 +66,7 @@ char	*ft_strtok(char *str, char c)
 		}
 		stock++;
 	}
+	if (*stock == '\0')
+		free(stock);
 	return (p);
 }

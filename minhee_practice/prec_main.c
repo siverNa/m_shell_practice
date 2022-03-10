@@ -1,5 +1,7 @@
 #include "minishell_prec.h"
 
+int g_exit_status = 0;
+
 void	free_cmdline(char **cmdline)
 {
 	int	i;
@@ -37,7 +39,7 @@ int	main(int ac, char **av, char **env)
 	t_data			input;
 	t_node			*cmds;
 	t_node			*list;
-	int				i, k;
+	int				i;
 	struct termios	org_term;
 	struct termios	new_term;
 
@@ -50,8 +52,8 @@ int	main(int ac, char **av, char **env)
 	input.env = copy_envs(env);
 	while (1)
 	{
-		input.str = readline("practice : ");
-		if (!input.str)
+		input.str = readline("\033[34;1mpractice : \033[0m");
+		if (!(input.str))
 		{
 			printf("\033[1A");
 			printf("\033[10C");
@@ -59,51 +61,26 @@ int	main(int ac, char **av, char **env)
 			exit(-1);
 		}
 		else if (*(input.str) == '\0')
-			free((input.str));
+			free(input.str);
 		else
 		{
 			input.tokens = tokenize(input.str, input.env);
-			write(1, "------------------------------\n", 31);
-			printf("printing tokens\n");
 			i = 0;
-			while (input.tokens[i])
+			while (input.tokens[i].value)
 			{
-				printf("token[%d]: [%s]\n", i, input.tokens[i]);
+				printf("tokenized:[%d] : %s\n", i, input.tokens[i].value);
 				i++;
 			}
-			write(1, "------------------------------\n", 31);
-			cmds = parse(input.tokens);
-			list = cmds;
-			if (cmds == NULL)
-				printf("cmds is NULL\n");
-			k = 0;
-			while (cmds != NULL)
-			{
-				printf("command[%d]: ", k);
-				i = 0;
-				while (cmds->cmd_line[i] != NULL)
-				{
-					printf("(%s) ", cmds->cmd_line[i]);
-					i++;
-				}
-				printf("\n");
-				cmds = cmds->next;
-				k++;
-			}
-			printf("end of cmds\n");
-			write(1, "------------------------------\n", 31);
+			list = parse(input.tokens);
+			cmds = list;
+			process(cmds, &input, input.str);
+			add_history(input.str);
+			free(input.str);
+			free_tokens(input.tokens);
 			free_cmds_list(list);
 			list = NULL;
-			//add_history(input.str);
 		}
 	}
-	return (0);
+	//free_cmdline(cmd.c_envs);
+	return (g_exit_status & 255);
 }
-
-/*
- compile command
- gcc prec_main.c prec_process.c -lreadline 
--L/home/linuxbrew/.linuxbrew/Cellar/readline/8.1.2/lib 
--I/home/linuxbrew/.linuxbrew/Cellar/readline/8.1.2/include -L../libft -lft 
--g3 -fsanitize=address
-*/

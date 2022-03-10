@@ -71,18 +71,12 @@ int	main(int ac, char **av, char **env)
 				printf("tokenized:[%d] : %s\n", i, input.tokens[i].value);
 				i++;
 			}
-			//cmd.cmd_line = cmd_init(str);
-			cmds = parse(input.tokens);
-			list = cmds;
-			//while (cmds != NULL)
-			//{
-				//printf("ENTER NEW COMMAND\n");
-				//cmds->file_path = build_path(cmds, &input, cmds->cmd_line[0]);
-				process(cmds, &input, input.str);
-				add_history(input.str);
-				free(input.str);
-				//cmds = cmds->next;
-			//}
+			list = parse(input.tokens);
+			cmds = list;
+			process(cmds, &input, input.str);
+			add_history(input.str);
+			free(input.str);
+			free_tokens(input.tokens);
 			free_cmds_list(list);
 			list = NULL;
 		}

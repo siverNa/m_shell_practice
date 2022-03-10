@@ -112,7 +112,7 @@ int	check_env(char *str, char *envs)
 	return (0);
 }
 
-int	built_export(char *cmd_line, char ***c_envs)
+int	start_export(char *cmd_line, char ***c_envs)
 {
 	int		i;
 	char	**new;
@@ -142,4 +142,29 @@ int	built_export(char *cmd_line, char ***c_envs)
 	free(*c_envs);
 	*c_envs = new;
 	return (SUCCESS);
+}
+
+int	built_export(char **cmd_line, char **c_envs)
+{
+	int		i;
+	int		res;
+
+	i = 0;
+	res = 1;
+	if (arr_2dchar_len(cmd_line) == 1)
+		print_export(c_envs);
+	else
+	{
+		while (cmd_line[++i])
+		{
+			if (start_export(cmd_line[i], &c_envs))
+				;
+			else
+				res = 0;
+		}
+	}
+	if (res)
+		return (1);
+	else
+		return (0);
 }

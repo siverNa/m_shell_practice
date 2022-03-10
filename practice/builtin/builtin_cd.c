@@ -104,8 +104,8 @@ int	start_cd(char *input, char **c_envs)
 			return (ERROR);
 		ch_path = ft_strjoin("PWD=", path);
 		old_pwd = ft_strjoin("OLDPWD=", find_value("PWD", c_envs));
-		built_export(ch_path, &c_envs);
-		built_export(old_pwd, &c_envs);
+		start_export(ch_path, &c_envs);
+		start_export(old_pwd, &c_envs);
 		free(path);
 		free(ch_path);
 		free(old_pwd);

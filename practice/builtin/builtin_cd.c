@@ -1,7 +1,8 @@
 #include "../minishell_prec.h"
 
-int	exec_cd_home(char *path, char **cmd_line, char **c_envs)
+/*int	exec_cd_home(char *path, char **cmd_line, char **c_envs)
 {
+	printf("i m inside function!\n");
 	if (cmd_line[1][1] == '~')
 	{
 		print_error_msg_2("cd", cmd_line[1], "No such file or directory");
@@ -46,6 +47,7 @@ void	built_cd(char **cmd_line, char **c_envs)
 
 	path = 0;
 	res = 0;
+	printf("cmdline[1] : %s\n", cmd_line[1]);
 	if (cmd_line[1] != NULL && cmd_line[1][0] != '~' && cmd_line[1][0] != '$')
 	{
 		path = cmd_line[1];
@@ -54,11 +56,43 @@ void	built_cd(char **cmd_line, char **c_envs)
 		set_pwd(c_envs);
 	}
 	else if (cmd_line[1] == NULL || cmd_line[1][0] == '~')
+	{
+		printf("i m inside if!\n");
 		exec_cd_home(path, cmd_line, c_envs);
+	}
 	else if (cmd_line[1][0] == '$')
 		exec_cd_envs(path, cmd_line, c_envs);
 	if (res == -1)
 		g_exit_status = 1;
 	else
 		g_exit_status = 0;
+}*/
+
+void	built_cd(char **cmd_line, char **c_envs)
+{
+	int		res;
+	char	*path;
+	char	*ch_path;
+	char	*old_pwd;
+
+	res = chdir(cmd_line[1]);
+	if (res == 0)
+	{
+		path = malloc(sizeof(char) * 1024);
+		if (!path)
+			return (ERROR);
+		path = getcwd(path, 1024);
+		if (!path)
+			return (ERROR);
+		ch_path = ft_strjoin("PWD=", path);
+		old_pwd = ft_strjoin("OLDPWD=", find_value("PWD", c_envs));
+		built_export(ch_path, &c_envs);
+		built_export(old_pwd, &c_envs);
+		free(path);
+		free(ch_path);
+		free(old_pwd);
+	}
+	else
+		g_exit_status = 1;
+	g_exit_status = 0;
 }

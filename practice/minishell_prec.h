@@ -111,10 +111,11 @@ int		remove_char(char *str, char c);
 /*
 ** builtin_cd.c
 */
-int		exec_cd_home(char *path, char **cmd_line, char **c_envs);
-int		exec_cd_envs(char *path, char **cmd_line, char **c_envs);
-void	set_pwd(char **c_envs);
-void	built_cd(char **cmd_line, char **envs);
+//int		exec_cd_home(char *path, char **cmd_line, char **c_envs);
+//int		exec_cd_envs(char *path, char **cmd_line, char **c_envs);
+//void	set_pwd(char **c_envs);
+//void	built_cd(char **cmd_line, char **envs);
+void	built_cd(char **cmd_line, char **c_envs);
 
 /*
 ** builtin_pwd.c
@@ -130,10 +131,12 @@ void	built_env(char **c_envs);
 ** builtin_export.c
 */
 void	add_export(char *str, char **new, int i);
-int		check_export(char *str, char ***envs);
+//int		check_export(char *str, char ***envs);
 int		isvalid_export(char *input);
 void	print_export(char **envs);
-void	built_export(t_node *cmd, char **cmd_line, t_data *input);
+//void	built_export(t_node *cmd, char **cmd_line, t_data *input);
+int		check_env(char *str, char *envs);
+int		built_export(char *cmd_line, char ***c_envs);
 
 /*
 ** builtin_echo.c

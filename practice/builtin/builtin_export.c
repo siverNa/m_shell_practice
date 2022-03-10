@@ -5,7 +5,7 @@ void	add_export(char *str, char **new, int i)
 	new[i] = ft_strdup(str);//메모리 누수 예상지점2
 	new[i + 1] = NULL;
 }
-
+/*
 int	check_export(char *str, char ***envs)
 {
 	int		i;
@@ -36,7 +36,7 @@ int	check_export(char *str, char ***envs)
 	free(*envs);//이건 맞는 free
 	*envs = new;
 	return (1);
-}
+}*/
 
 int	isvalid_export(char *input)
 {
@@ -64,7 +64,7 @@ void	print_export(char **envs)
 		i++;
 	}
 }
-
+/*
 void	built_export(t_node *cmd, char **cmd_line, t_data *input)
 {
 	int		i;
@@ -94,4 +94,52 @@ void	built_export(t_node *cmd, char **cmd_line, t_data *input)
 	}
 	if (res != 1)
 		g_exit_status = 1;
+}*/
+
+int	check_env(char *str, char *envs)
+{
+	int		i;
+
+	i = 0;
+	while (str[i] && envs[i] && (str[i] == envs[i]) && (str[i] != '=')
+		&& (envs[i] != '='))
+		i++;
+	if (i == 0)
+		return (0);
+	if (((envs[i] == '=') && (str[i] == '='))
+		|| ((envs[i] == '=') || str[i] == 0))
+		return (1);
+	return (0);
+}
+
+int	built_export(char *cmd_line, char ***c_envs)
+{
+	int		i;
+	char	**new;
+
+	if (cmd_line[0] == '=' || cmd_line[0] == '\0')
+		return (ERROR);
+	i = -1;
+	while ((*c_envs)[++i] != NULL)
+	{
+		if (check_env(cmd_line, (*c_envs)[i]))
+		{
+			free((*c_envs)[i]);
+			(*c_envs)[i] = ft_strdup(cmd_line);
+			return (SUCCESS);
+		}
+	}
+	new = malloc(sizeof(char *) * (i + 2));
+	if (!new)
+		return (ERROR);
+	i = -1;
+	while ((*c_envs)[++i])
+	{
+		new[i] = ft_strdup((*c_envs)[i]);
+		free((*c_envs)[i]);
+	}
+	add_export(cmd_line, new, i);
+	free(*c_envs);
+	*c_envs = new;
+	return (SUCCESS);
 }

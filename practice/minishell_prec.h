@@ -132,14 +132,10 @@ void	built_env(char **c_envs);
 ** builtin_export.c
 */
 void	add_export(char *str, char **new, int i);
-//int		check_export(char *str, char ***envs);
 int		isvalid_export(char *input);
 void	print_export(char **envs);
-//void	built_export(t_node *cmd, char **cmd_line, t_data *input);
-int		check_env(char *str, char *envs);
 int		start_export(char *cmd_line, char ***c_envs);
-//int		built_export(char **cmd_line, char **c_envs);
-int		built_export(char **cmd_line, t_data *input);
+int		built_export(t_node *cmd, char **cmd_line, t_data *input);
 
 /*
 ** builtin_echo.c
@@ -178,7 +174,8 @@ void	print_identify_error_msg(char *first, char *sec);
 char	**copy_envs(char **envs);
 char	*find_value(char *input, char **envs);
 int		arr_2dchar_len(char **str);
-char	*ft_strtok(char *str, char c);
+int		check_env(char *str, char *envs);
+void 	copy_env_to_new(char **new, char ***c_envs, int *i);
 
 /*
 ** free.c

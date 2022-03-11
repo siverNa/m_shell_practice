@@ -95,10 +95,10 @@ void	process(t_node *cmd, t_data *input, char *str)
 
 			if ((check_builtin(cmd->cmd_line) == TRUE) && cmd->status == 0)
 			{
-				if (cmd->redir == 0)
+				//if (cmd->redir == 0)
 					start_builtin(cmd, cmd->cmd_line, input);
-				else
-					builtin_redir_nopipe(cmd, input);
+				//else
+				//	builtin_redir_nopipe(cmd, input);
 			}
 			else
 				start_pipe(cmd, input, str);

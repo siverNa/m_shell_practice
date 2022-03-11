@@ -1,6 +1,6 @@
 #include "minishell_prec.h"
 
-int g_exit_status = 0;
+int	g_exit_status = 0;
 
 void	free_cmdline(char **cmdline)
 {
@@ -30,6 +30,13 @@ void	sig_handler(int signum)
 
 void	setting_signal(void)
 {
+	struct termios	org_term;
+	struct termios	new_term;
+
+	tcgetattr(STDIN_FILENO, &org_term);
+	tcgetattr(STDIN_FILENO, &new_term);
+	new_term.c_lflag &= ~(ECHOCTL);
+	tcsetattr(STDIN_FILENO, TCSANOW, &new_term);
 	signal(SIGINT, sig_handler);
 	signal(SIGQUIT, SIG_IGN);
 }
@@ -40,14 +47,10 @@ int	main(int ac, char **av, char **env)
 	t_node			*cmds;
 	t_node			*list;
 	int				i;
-	struct termios	org_term;
-	struct termios	new_term;
 
-	tcgetattr(STDIN_FILENO, &org_term);
-	tcgetattr(STDIN_FILENO, &new_term);
-	new_term.c_lflag &= ~(ECHOCTL);
-	tcsetattr(STDIN_FILENO, TCSANOW, &new_term);
 	setting_signal();
+	(void)ac;
+	(void)av;
 	input.env = NULL;
 	input.env = copy_envs(env);
 	while (1)

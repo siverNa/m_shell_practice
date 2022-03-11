@@ -59,10 +59,10 @@ int	set_fd_in_out(t_data *input, t_node *cmd)
 	return (1);
 }
 
-int	redirect(t_data *input, t_node *cmd)
+void	redirect(t_data *input, t_node *cmd)
 {
 	if (set_fd_in_out(input, cmd) == 0)
-		return (-1);
+		return ;
 	if (cmd->fd_in != 0)
 	{
 		dup2(cmd->fd_in, STDIN);

@@ -18,7 +18,7 @@ char	**parsing_str(char *str, char **result, t_pars *pars)
 		}
 		result[pars->j][pars->count] = '\0';
 		pars->i++;
-		pars->j++; 
+		pars->j++;
 	}
 	result[pars->j] = 0;
 	return (result);

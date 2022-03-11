@@ -22,8 +22,8 @@ int	check_quote(char *str, int i, char quote)
 void	concat_char(char **str, char c)
 {
 	char	*temp;
-	int	i;
-	int	size;
+	int		i;
+	int		size;
 
 	if (*str == NULL)
 		size = 0;
@@ -47,4 +47,3 @@ void	concat_char(char **str, char c)
 	*str = temp;
 	return ;
 }
-

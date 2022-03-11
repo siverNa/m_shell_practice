@@ -85,6 +85,8 @@ void	process(t_node *cmd, t_data *input, char *str)
 	{
 		if (cmd->cmd_line[0])
 		{
+			//print command line
+			cmd->here_doc = 0;
 			printf("CMD_LINE: ");
 			int i = 0;
 			while (cmd->cmd_line[i])
@@ -101,7 +103,8 @@ void	process(t_node *cmd, t_data *input, char *str)
 			else
 				start_pipe(cmd, input, str);
 		}
-		printf("FINISHED CMD\n");
+		if (cmd->here_doc != 0)
+			unlink(".temp");
 		cmd = cmd->next;
 	}
 }

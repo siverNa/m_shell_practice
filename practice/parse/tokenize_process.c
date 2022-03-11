@@ -11,16 +11,16 @@ int	process_env(char *str, int j, char **token, char **env)
 	if (str[j] == 0 || str[j] == ' ')
 	{
 		concat_char(token, '$');
-		return(j);
+		return (j);
 	}
-	while (ft_isalpha(str[j]) || str[j] == '_')
+	while (ft_isalnum(str[j]) || str[j] == '_')
 	{
 		concat_char(&var_name, str[j]);
 		j++;
 	}
 	value = find_value(var_name, env);
 	k = 0;
-	while(value[k])
+	while (value[k])
 	{
 		concat_char(token, value[k]);
 		k++;

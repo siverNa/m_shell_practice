@@ -36,6 +36,7 @@ typedef struct s_node
 	int				status;
 	int				pre_status;
 	int				redir;
+	int				here_doc;
 	int				start;
 	int				last;
 	struct s_node	*prev;

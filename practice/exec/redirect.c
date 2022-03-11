@@ -59,12 +59,10 @@ int	set_fd_in_out(t_data *input, t_node *cmd)
 	return (1);
 }
 
-void	redirect(t_data *input, t_node *cmd)
+int	redirect(t_data *input, t_node *cmd)
 {
 	if (set_fd_in_out(input, cmd) == 0)
-	{
-		//file does not exist!
-	}
+		return (-1);
 	if (cmd->fd_in != 0)
 	{
 		dup2(cmd->fd_in, STDIN);

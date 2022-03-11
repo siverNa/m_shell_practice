@@ -2,8 +2,10 @@
 
 void	add_export(char *str, char **new, int i)
 {
+	printf("cmd_line : %s, i : %d\n", str, i);
 	new[i] = ft_strdup(str);//메모리 누수 예상지점2
 	new[i + 1] = NULL;
+	printf("new[%d] : %s, %p\n", i, new[i], new[i]);
 }
 /*
 int	check_export(char *str, char ***envs)
@@ -59,7 +61,7 @@ void	print_export(char **envs)
 	i = 0;
 	while (envs[i])
 	{
-		ft_putstr_fd(envs[i], STDIN);
+		ft_putstr_fd(envs[i], STDOUT);
 		write(STDOUT, "\n", 1);
 		i++;
 	}
@@ -129,7 +131,7 @@ int	start_export(char *cmd_line, char ***c_envs)
 			return (SUCCESS);
 		}
 	}
-	new = malloc(sizeof(char *) * (i + 2));
+	new = (char **)malloc(sizeof(char *) * (i + 2));
 	if (!new)
 		return (ERROR);
 	i = -1;
@@ -138,13 +140,17 @@ int	start_export(char *cmd_line, char ***c_envs)
 		new[i] = ft_strdup((*c_envs)[i]);
 		free((*c_envs)[i]);
 	}
+	printf("cmd_line : %s, i = %d\n", cmd_line, i);
 	add_export(cmd_line, new, i);
+	printf("old c_envs addr : %p, new addr : %p\n", *c_envs, new);
 	free(*c_envs);
-	*c_envs = new;
+	(*c_envs) = new;
+	printf("new c_envs addr : %p\n", *c_envs);
 	return (SUCCESS);
 }
 
-int	built_export(char **cmd_line, char **c_envs)
+//int	built_export(char **cmd_line, char **c_envs)
+int	built_export(char **cmd_line, t_data *input)
 {
 	int		i;
 	int		res;
@@ -152,12 +158,12 @@ int	built_export(char **cmd_line, char **c_envs)
 	i = 0;
 	res = 1;
 	if (arr_2dchar_len(cmd_line) == 1)
-		print_export(c_envs);
+		print_export(input->env);
 	else
 	{
 		while (cmd_line[++i])
 		{
-			if (start_export(cmd_line[i], &c_envs))
+			if (start_export(cmd_line[i], &input->env))
 				;
 			else
 				res = 0;

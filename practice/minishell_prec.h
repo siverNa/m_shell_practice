@@ -138,7 +138,8 @@ void	print_export(char **envs);
 //void	built_export(t_node *cmd, char **cmd_line, t_data *input);
 int		check_env(char *str, char *envs);
 int		start_export(char *cmd_line, char ***c_envs);
-int		built_export(char **cmd_line, char **c_envs);
+//int		built_export(char **cmd_line, char **c_envs);
+int		built_export(char **cmd_line, t_data *input);
 
 /*
 ** builtin_echo.c

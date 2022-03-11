@@ -28,7 +28,7 @@ int	start_builtin(t_node *cmd, char **cmd_line, t_data *input)
 		built_env(input->env);
 	else if (!ft_strncmp(builtin, "export", 6))
 		//built_export(cmd, cmd_line, input);
-		built_export(cmd_line, input->env);
+		built_export(cmd_line, input);
 	else if (!ft_strncmp(builtin, "unset", 5))
 		built_unset(cmd, cmd_line, input);
 	else if (!ft_strncmp(builtin, "exit", 4))

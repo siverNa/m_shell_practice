@@ -75,6 +75,7 @@ t_node	*parse(t_token *tokens)
 		if (new_node == NULL)
 			exit(1);
 		new_node->status = 0;
+		new_node->redir = 0;
 		new_node->start = i;
 		i = make_cmd_line(new_node, tokens, i);
 		i = set_parse_flag(new_node, tokens, i);

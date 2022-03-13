@@ -6,7 +6,7 @@
 /*   By: sna <sna@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/13 23:47:41 by sna               #+#    #+#             */
-/*   Updated: 2022/03/14 01:24:52 by sna              ###   ########.fr       */
+/*   Updated: 2022/03/14 01:32:46 by sna              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,12 @@ int	start_cd(char *input, char **c_envs)
 		free(path);
 	}
 	else
+	{
+		print_error_msg_2("cd", input, "No such file or directory");
+		g_exit_status = 1;
 		return (ERROR);
+	}
+	g_exit_status = 0;
 	return (SUCCESS);
 }
 

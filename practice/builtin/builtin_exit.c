@@ -17,7 +17,7 @@ int	isdigit_str(char *str)
 void	start_exit(void)
 {
 	ft_putstr_fd("exit\n", STDERR);
-	exit(1);
+	exit(g_exit_status);
 }
 
 void	built_exit(t_node *cmd, char **cmd_line)

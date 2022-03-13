@@ -61,7 +61,7 @@ int	start_export(char *cmd_line, char ***c_envs)
 	return (SUCCESS);
 }
 
-int	built_export(t_node *cmd, char **cmd_line, t_data *input)
+void	built_export(t_node *cmd, char **cmd_line, t_data *input)
 {
 	int		i;
 	int		res;
@@ -69,7 +69,7 @@ int	built_export(t_node *cmd, char **cmd_line, t_data *input)
 	i = 0;
 	res = 1;
 	if (cmd->pre_status == 1)
-		return (0);
+		return ;
 	if (arr_2dchar_len(cmd_line) == 1)
 		print_export(input->env);
 	else
@@ -83,7 +83,7 @@ int	built_export(t_node *cmd, char **cmd_line, t_data *input)
 		}
 	}
 	if (res)
-		return (1);
+		g_exit_status = 0;
 	else
-		return (0);
+		g_exit_status = 1;
 }

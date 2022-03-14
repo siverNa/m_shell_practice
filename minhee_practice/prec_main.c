@@ -66,7 +66,7 @@ int	main(int ac, char **av, char **env)
 		{
 			input.tokens = tokenize(input.str, input.env);
 			i = 0;
-			while (input.tokens[i].value)
+			while (input.tokens[i].type != -1)
 			{
 				printf("tokenized:[%d] : %s\n", i, input.tokens[i].value);
 				i++;

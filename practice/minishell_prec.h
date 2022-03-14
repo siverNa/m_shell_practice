@@ -82,7 +82,7 @@ void	process(t_node *cmd, t_data *input, char *str);
 /*
 ** redirect.c
 */
-void	redirect(t_data *input, t_node *cmd);
+int	redirect(t_data *input, t_node *cmd);
 int	set_fd_in_out(t_data *input, t_node *cmd);
 
 /*

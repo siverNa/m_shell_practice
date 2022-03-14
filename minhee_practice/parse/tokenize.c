@@ -47,6 +47,17 @@ void	handle_count(int *status, int flag, int *count)
 	return ;
 }
 
+void	count_pipe_redir(char *str, int *count, int *i, int *status)
+{
+	(*count)++;
+	*status = 0;
+	if (str[*i] != '|')
+	{
+		if (str[*i] == str[*i + 1])
+			(*i)++;
+	}
+}
+
 int	count_tokens(char *str)
 {
 	int	count;
@@ -60,18 +71,8 @@ int	count_tokens(char *str)
 	{
 		if (str[i] == ' ')
 			handle_count(&status, 0, &count);
-		else if (str[i] == '|')
-		{
-			count++;
-			status = 0;
-		}
-		else if (str[i] == '<' || str[i] == '>')
-		{
-			count++;
-			status = 0;
-			if ((str[i] == '<' && str[i + 1] == '<') || (str[i] == '>' && str[i + 1] == '>'))
-				i++;
-		}
+		else if (str[i] == '|' || str[i] == '<' || str[i] == '>')
+			count_pipe_redir(str, &count, &i, &status);
 		else if (str[i] == '\"' || str[i] == '\'')
 		{
 			i = check_quote(str, i, str[i]);

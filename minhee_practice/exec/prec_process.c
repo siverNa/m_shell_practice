@@ -26,7 +26,8 @@ void	child_process(t_node *cmd, t_data *input, char *str, t_node *n_cmd)
 		close(cmd->fd[0]);
 	}
 	if (cmd->redir == 1)
-		redirect(input, cmd);
+		if (redirect(input, cmd) == -1)
+			exit(-1);
 	if ((check_builtin(cmd->cmd_line) == TRUE))
 		start_builtin(cmd, cmd->cmd_line, input);
 	else
@@ -71,7 +72,8 @@ void	builtin_redir_nopipe(t_node *cmd, t_data *input)
 	pid = fork();
 	if (pid == 0)
 	{
-		redirect(input, cmd);
+		if (redirect(input, cmd) == -1)
+			exit(1);
 		start_builtin(cmd, cmd->cmd_line, input);
 		exit(1);
 	}
@@ -85,6 +87,8 @@ void	process(t_node *cmd, t_data *input, char *str)
 	{
 		if (cmd->cmd_line[0])
 		{
+			//print command line
+			cmd->here_doc = 0;
 			printf("CMD_LINE: ");
 			int i = 0;
 			while (cmd->cmd_line[i])
@@ -97,16 +101,12 @@ void	process(t_node *cmd, t_data *input, char *str)
 					start_builtin(cmd, cmd->cmd_line, input);
 				else
 					builtin_redir_nopipe(cmd, input);
-				/*
-				redirect(input, cmd);
-				start_builtin(cmd, cmd->cmd_line, input);
-				printf("fd_in %d fd_out %d\n", cmd->fd_in, cmd->fd_out);
-				*/
 			}
 			else
 				start_pipe(cmd, input, str);
 		}
-		printf("FINISHED CMD\n");
+		if (cmd->here_doc != 0)
+			unlink(".temp");
 		cmd = cmd->next;
 	}
 }

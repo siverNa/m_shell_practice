@@ -51,18 +51,21 @@ int	set_fd_in_out(t_data *input, t_node *cmd)
 			redir = input->tokens[x].value;
 			filename = input->tokens[x + 1].value;
 			open_filename(redir, filename, cmd);
+			if (cmd->fd_out == -1 || cmd->fd_in == -1)
+			{
+				ft_putstr_fd("--bash: error: No such file or directory\n", 1);
+				return (0);
+			}
 		}
 		x++;
 	}
-	if (cmd->fd_out == -1 || cmd->fd_in == -1)
-		return (0);
 	return (1);
 }
 
-void	redirect(t_data *input, t_node *cmd)
+int	redirect(t_data *input, t_node *cmd)
 {
 	if (set_fd_in_out(input, cmd) == 0)
-		return ;
+		return (-1);
 	if (cmd->fd_in != 0)
 	{
 		dup2(cmd->fd_in, STDIN);
@@ -73,5 +76,5 @@ void	redirect(t_data *input, t_node *cmd)
 		dup2(cmd->fd_out, STDOUT);
 		close(cmd->fd_out);
 	}
-	return ;
+	return (0);
 }

@@ -26,7 +26,8 @@ void	child_process(t_node *cmd, t_data *input, char *str, t_node *n_cmd)
 		close(cmd->fd[0]);
 	}
 	if (cmd->redir == 1)
-		redirect(input, cmd);
+		if (redirect(input, cmd) == -1)
+			exit(1);
 	if ((check_builtin(cmd->cmd_line) == TRUE))
 		start_builtin(cmd, cmd->cmd_line, input);
 	else
@@ -67,15 +68,22 @@ void	builtin_redir_nopipe(t_node *cmd, t_data *input)
 {
 	pid_t	pid;
 	int		status;
+	char	*s;
 
 	pid = fork();
 	if (pid == 0)
 	{
-		redirect(input, cmd);
+		if (redirect(input, cmd) == -1)
+			exit(1);
 		start_builtin(cmd, cmd->cmd_line, input);
+		close(STDOUT);
 		exit(1);
 	}
 	waitpid(pid, &status, 0);
+	s = cmd->cmd_line[0];
+	if (!ft_strcmp(s, "echo") && !ft_strcmp(s, "env") && !ft_strcmp(s, "pwd"))
+		start_builtin(cmd, cmd->cmd_line, input);
+	
 	return ;
 }
 

@@ -16,7 +16,6 @@ int	isdigit_str(char *str)
 
 void	start_exit(void)
 {
-	ft_putstr_fd("exit\n", STDERR);
 	exit(1);
 }
 

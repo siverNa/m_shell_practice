@@ -219,6 +219,11 @@ int	check_quote(char *str, int i, char quote);
 t_node	*parse(t_token *tokens);
 
 /*
+ ** check_syntax.c
+*/
+int	check_syntax(t_data *input);
+
+/*
 ** utils.c
 */
 int ft_strcmp(char *s1, char *s2);

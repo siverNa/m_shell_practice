@@ -71,6 +71,8 @@ int	main(int ac, char **av, char **env)
 				printf("tokenized:[%d] : %s\n", i, input.tokens[i].value);
 				i++;
 			}
+			if (check_syntax(&input) == -1)
+				continue ;
 			list = parse(input.tokens);
 			cmds = list;
 			process(cmds, &input, input.str);

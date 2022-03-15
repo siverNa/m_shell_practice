@@ -224,5 +224,11 @@ t_node	*parse(t_token *tokens);
 ** utils.c
 */
 int ft_strcmp(char *s1, char *s2);
+int		ft_strcmp2(const char *s1, const char *s2);
+
+/*
+** sort_envs.c
+*/
+void	sort_envs(char **temp, char **envs, int size);
 
 #endif

@@ -23,14 +23,22 @@ int	isvalid_export(char *input)
 void	print_export(char **envs)
 {
 	int		i;
+	int		size;
+	char	**temp;
 
 	i = 0;
-	while (envs[i])
+	size = 0;
+	while (envs[size])
+		size++;
+	temp = (char **)malloc(sizeof(char *) * (size + 1));
+	sort_envs(temp, envs, size);
+	while (temp[i])
 	{
-		ft_putstr_fd(envs[i], STDOUT);
+		ft_putstr_fd(temp[i], STDOUT);
 		write(STDOUT, "\n", 1);
 		i++;
 	}
+	free_2d_arr(temp);
 }
 
 int	start_export(char *cmd_line, char ***c_envs)

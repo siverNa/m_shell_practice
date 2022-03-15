@@ -68,6 +68,7 @@ typedef struct s_pars
 **	main.c
 */
 void	free_cmdline(char **cmdline);
+void	sig_handler2(int signum);
 void	sig_handler(int signum);
 void	setting_signal(void);
 

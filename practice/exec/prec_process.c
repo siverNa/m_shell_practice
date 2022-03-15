@@ -50,7 +50,6 @@ int	start_pipe(t_node *cmd, t_data *input, char *str)
 	{
 		n_cmd = cmd->next;
 		n_cmd-> pre_status = 1;
-		printf("%s\n", n_cmd->cmd_line[0]);
 		pipe(n_cmd->fd);
 	}
 	pid = fork();
@@ -93,14 +92,6 @@ void	process(t_node *cmd, t_data *input, char *str)
 	{
 		if (cmd->cmd_line[0])
 		{
-			//print command line
-			cmd->here_doc = 0;
-			printf("CMD_LINE: ");
-			int i = 0;
-			while (cmd->cmd_line[i])
-				printf("[%s]", cmd->cmd_line[i++]);
-			printf("\n");
-
 			if ((check_builtin(cmd->cmd_line) == TRUE) && cmd->status == 0)
 			{
 				if (cmd->redir == 0)

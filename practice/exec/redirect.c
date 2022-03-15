@@ -7,13 +7,13 @@ int	here_doc(char *delim, t_node *cmd)
 
 	cmd->here_doc = 1;
 	fd = open(".temp", O_WRONLY | O_APPEND | O_CREAT, 0644);
-	buf = readline("here_doc>");
+	buf = readline(">");
 	while (buf != NULL && ft_strcmp(buf, delim) != 1)
 	{
 		write(fd, buf, ft_strlen(buf));
 		write(fd, "\n", 1);
 		free(buf);
-		buf = readline("here_doc>");
+		buf = readline(">");
 	}
 	free(buf);
 	close(fd);
@@ -53,7 +53,7 @@ int	set_fd_in_out(t_data *input, t_node *cmd)
 			open_filename(redir, filename, cmd);
 			if (cmd->fd_out == -1 || cmd->fd_in == -1)
 			{
-				ft_putstr_fd("--bash: error: No such file or directory\n", 1);
+				ft_putstr_fd("-bash: error: No such file or directory\n", 1);
 				return (0);
 			}
 		}

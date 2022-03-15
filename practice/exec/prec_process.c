@@ -47,6 +47,8 @@ int	start_pipe(t_node *cmd, t_data *input, char *str)
 	n_cmd = cmd;
 	if (cmd->status == 1)
 	{
+		if (cmd->next == NULL)
+			return (-1);
 		n_cmd = cmd->next;
 		n_cmd-> pre_status = 1;
 		printf("%s\n", n_cmd->cmd_line[0]);
@@ -95,10 +97,10 @@ void	process(t_node *cmd, t_data *input, char *str)
 
 			if ((check_builtin(cmd->cmd_line) == TRUE) && cmd->status == 0)
 			{
-				//if (cmd->redir == 0)
+				if (cmd->redir == 0)
 					start_builtin(cmd, cmd->cmd_line, input);
-				//else
-				//	builtin_redir_nopipe(cmd, input);
+				else
+					builtin_redir_nopipe(cmd, input);
 			}
 			else
 				start_pipe(cmd, input, str);

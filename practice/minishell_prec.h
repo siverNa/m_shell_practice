@@ -68,9 +68,6 @@ typedef struct s_pars
 **	main.c
 */
 void	free_cmdline(char **cmdline);
-void	sig_handler2(int signum);
-void	sig_handler(int signum);
-void	setting_signal(void);
 void	shell_ready(t_data *input, t_node *cmds, t_node *list);
 
 /*
@@ -232,5 +229,12 @@ int		ft_strcmp2(const char *s1, const char *s2);
 ** sort_envs.c
 */
 void	sort_envs(char **temp, t_data *input, int size);
+
+/*
+** signal_utils.c
+*/
+void	sig_handler2(int signum);
+void	sig_handler(int signum);
+void	setting_signal(void);
 
 #endif

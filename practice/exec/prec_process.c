@@ -48,6 +48,8 @@ int	start_pipe(t_node *cmd, t_data *input, char *str)
 	n_cmd = cmd;
 	if (cmd->status == 1)
 	{
+		if (cmd->next == NULL)
+			return (-1);
 		n_cmd = cmd->next;
 		n_cmd-> pre_status = 1;
 		pipe(n_cmd->fd);

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   builtin_cd.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sna <sna@student.42seoul.kr>               +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/03/13 23:47:41 by sna               #+#    #+#             */
+/*   Updated: 2022/03/14 01:32:46 by sna              ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../minishell_prec.h"
 
 /*int	exec_cd_home(char *path, char **cmd_line, char **c_envs)
@@ -102,15 +114,25 @@ int	start_cd(char *input, char **c_envs)
 		path = getcwd(path, 1024);
 		if (!path)
 			return (ERROR);
-		ch_path = ft_strjoin("PWD=", path);
-		old_pwd = ft_strjoin("OLDPWD=", find_value("PWD", c_envs));
-		start_export(ch_path, &c_envs);
-		start_export(old_pwd, &c_envs);
+		set_cd_pwd(ch_path, old_pwd, path, c_envs);
 		free(path);
-		free(ch_path);
-		free(old_pwd);
 	}
 	else
+	{
+		print_error_msg_2("cd", input, "No such file or directory");
+		g_exit_status = 1;
 		return (ERROR);
+	}
+	g_exit_status = 0;
 	return (SUCCESS);
+}
+
+void	set_cd_pwd(char *ch_path, char *old_pwd, char *path, char **c_envs)
+{
+	ch_path = ft_strjoin("PWD=", path);
+	old_pwd = ft_strjoin("OLDPWD=", find_value("PWD", c_envs));
+	start_export(ch_path, &c_envs);
+	start_export(old_pwd, &c_envs);
+	free(ch_path);
+	free(old_pwd);
 }

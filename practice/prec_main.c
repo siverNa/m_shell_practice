@@ -72,12 +72,26 @@ void	setting_signal(void)
 	signal(SIGQUIT, sig_handler2);
 }
 
+void	shell_ready(t_data *input, t_node *cmds, t_node *list)
+{
+	input->tokens = tokenize(input->str, input->env);
+	if (check_syntax(input) == -1)
+		return ;
+	list = parse(input->tokens);
+	cmds = list;
+	process(cmds, input, input->str);
+	add_history(input->str);
+	free(input->str);
+	free_tokens(input->tokens);
+	free_cmds_list(list);
+	list = NULL;
+}
+
 int	main(int ac, char **av, char **env)
 {
 	t_data			input;
 	t_node			*cmds;
 	t_node			*list;
-	int				i;
 
 	setting_signal();
 	(void)ac;
@@ -97,20 +111,7 @@ int	main(int ac, char **av, char **env)
 		else if (*(input.str) == '\0')
 			free(input.str);
 		else
-		{
-			input.tokens = tokenize(input.str, input.env);
-			if (check_syntax(&input) == -1)
-				continue ;
-			list = parse(input.tokens);
-			cmds = list;
-			process(cmds, &input, input.str);
-			add_history(input.str);
-			free(input.str);
-			free_tokens(input.tokens);
-			free_cmds_list(list);
-			list = NULL;
-		}
+			shell_ready(&input, list, cmds);
 	}
-	//free_cmdline(cmd.c_envs);
 	return (g_exit_status & 255);
 }

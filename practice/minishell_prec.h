@@ -71,6 +71,7 @@ void	free_cmdline(char **cmdline);
 void	sig_handler2(int signum);
 void	sig_handler(int signum);
 void	setting_signal(void);
+void	shell_ready(t_data *input, t_node *cmds, t_node *list);
 
 /*
 **	prec_process.c
@@ -142,7 +143,7 @@ void	built_env(char **c_envs);
 */
 void	add_export(char *str, char **new, int i);
 int		isvalid_export(char *input);
-void	print_export(char **envs);
+void	print_export(t_data *input);
 int		start_export(char *cmd_line, char ***c_envs);
 //int		built_export(t_node *cmd, char **cmd_line, t_data *input);
 void	built_export(t_node *cmd, char **cmd_line, t_data *input);
@@ -235,6 +236,6 @@ int		ft_strcmp2(const char *s1, const char *s2);
 /*
 ** sort_envs.c
 */
-void	sort_envs(char **temp, char **envs, int size);
+void	sort_envs(char **temp, t_data *input, int size);
 
 #endif

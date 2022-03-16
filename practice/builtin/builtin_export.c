@@ -20,7 +20,7 @@ int	isvalid_export(char *input)
 	return (TRUE);
 }
 
-void	print_export(char **envs)
+void	print_export(t_data *input)
 {
 	int		i;
 	int		size;
@@ -28,10 +28,10 @@ void	print_export(char **envs)
 
 	i = 0;
 	size = 0;
-	while (envs[size])
+	while (input->env[size])
 		size++;
 	temp = (char **)malloc(sizeof(char *) * (size + 1));
-	sort_envs(temp, envs, size);
+	sort_envs(temp, input, size);
 	while (temp[i])
 	{
 		ft_putstr_fd(temp[i], STDOUT);
@@ -79,7 +79,7 @@ void	built_export(t_node *cmd, char **cmd_line, t_data *input)
 	if (cmd->pre_status == 1)
 		return ;
 	if (arr_2dchar_len(cmd_line) == 1)
-		print_export(input->env);
+		print_export(input);
 	else
 	{
 		while (cmd_line[++i])

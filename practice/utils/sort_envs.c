@@ -6,13 +6,13 @@
 /*   By: sna <sna@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 21:51:42 by sna               #+#    #+#             */
-/*   Updated: 2022/03/15 21:54:44 by sna              ###   ########.fr       */
+/*   Updated: 2022/03/16 21:49:41 by sna              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell_prec.h"
 
-void	sort_envs(char **temp, char **envs, int size)
+void	sort_envs(char **temp, t_data *input, int size)
 {
 	int		i;
 	int		step;
@@ -20,8 +20,8 @@ void	sort_envs(char **temp, char **envs, int size)
 
 	step = 0;
 	i = -1;
-	while (envs[++i])
-		temp[i] = ft_strdup(envs[i]);
+	while (input->env[++i])
+		temp[i] = ft_strdup(input->env[i]);
 	temp[i] = NULL;
 	while (step < size - 1)
 	{

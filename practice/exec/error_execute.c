@@ -5,6 +5,7 @@ int	print_exe_error_msg(t_node *cmd, char *str)
 	ft_putstr_fd("practice : command not found: ", 2);
 	ft_putstr_fd(cmd->cmd_line[0], 2);
 	ft_putstr_fd("\n", 2);
+	g_exit_status = 127;
 	return (-1);
 }
 

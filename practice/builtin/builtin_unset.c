@@ -63,6 +63,12 @@ void	built_unset(t_node *cmd, char **cmd_line, t_data *input)
 	res = 0;
 	if (cmd->pre_status == 1)
 		return ;
+	if (cmd_line[i] == NULL)
+	{
+		print_error_msg("unset", "not enough arguments");
+		g_exit_status = 1;
+		return ;
+	}
 	while (cmd_line[i])
 	{
 		remove_char(cmd_line[i], '\'');

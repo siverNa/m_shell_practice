@@ -7,6 +7,8 @@ int	isvalid_env(char *line)
 	i = -1;
 	while (line[++i])
 	{
+		if (ft_isdigit(line[0]))
+			return (FALSE);
 		if (ft_isalnum(line[i]) || line[i] == '_')
 			;
 		else

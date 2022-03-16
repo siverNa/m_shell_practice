@@ -11,6 +11,8 @@ int	check_pipe(t_token *tokens, int i)
 {
 	if (i != 0 && tokens[i + 1].type == 0)
 		return (i + 1);
+	if (i != 0 && tokens[i + 1].type == 2)
+		return (i + 1);
 	ft_putstr_fd("-bash: syntax error near unexpected token \'", 1);
 	ft_putstr_fd(tokens[i].value, 1);
 	write(1, "\'\n", 2);

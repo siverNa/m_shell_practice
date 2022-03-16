@@ -18,11 +18,22 @@ void	add_list_back(t_node **list, t_node *new_node)
 	return ;
 }
 
+int	skip_redir(t_node *new_node, t_token *tokens, int i)
+{
+	if (tokens[i].type == 0)
+		return (i);
+	new_node->redir = 1;
+	while (tokens[i].type == 2)
+		i += 2;
+	return (i);
+}
+
 int	make_cmd_line(t_node *new_node, t_token *tokens, int i)
 {
 	int	j;
 	int	k;
 
+	i = skip_redir(new_node, tokens, i);
 	j = i;
 	k = 0;
 	while (tokens[j].type == 0)
@@ -43,7 +54,6 @@ int	make_cmd_line(t_node *new_node, t_token *tokens, int i)
 			i++;
 	}
 	new_node->cmd_line[k] = NULL;
-	new_node->next = NULL;
 	return (j);
 }
 
@@ -74,6 +84,7 @@ t_node	*parse(t_token *tokens)
 		new_node = (t_node *)malloc(sizeof(t_node));
 		if (new_node == NULL)
 			exit(1);
+		new_node->next = NULL;
 		new_node->status = 0;
 		new_node->redir = 0;
 		new_node->start = i;

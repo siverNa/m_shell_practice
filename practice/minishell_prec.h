@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minishell_prec.h                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: minhekim <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/03/17 14:33:34 by minhekim          #+#    #+#             */
+/*   Updated: 2022/03/17 14:33:38 by minhekim         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef MINISHELL_PREC_H
 # define MINISHELL_PREC_H
 # include <stdio.h>
@@ -49,7 +61,7 @@ typedef struct s_token
 	int		type;
 }			t_token;
 
-typedef	struct s_data
+typedef struct s_data
 {
 	char	*str;
 	t_token	*tokens;
@@ -81,8 +93,8 @@ void	process(t_node *cmd, t_data *input, char *str);
 /*
 ** redirect.c
 */
-int	redirect(t_data *input, t_node *cmd);
-int	set_fd_in_out(t_data *input, t_node *cmd);
+int		redirect(t_data *input, t_node *cmd);
+int		set_fd_in_out(t_data *input, t_node *cmd);
 
 /*
 ** cmd_init.c
@@ -118,7 +130,7 @@ int		remove_char(char *str, char c);
 ** builtin_cd.c
 */
 int		built_cd(char **cmd_line, char **c_envs);
-int 	start_cd(char *input, char **c_envs);
+int		start_cd(char *input, char **c_envs);
 void	set_cd_pwd(char *ch_path, char *old_pwd, char *path, char **c_envs);
 
 /*
@@ -178,7 +190,7 @@ char	**copy_envs(char **envs);
 char	*find_value(char *input, char **envs);
 int		arr_2dchar_len(char **str);
 int		check_env(char *str, char *envs);
-void 	copy_env_to_new(char **new, char ***c_envs, int *i);
+void	copy_env_to_new(char **new, char ***c_envs, int *i);
 
 /*
 ** free.c
@@ -191,25 +203,25 @@ void	free_tokens(t_token *token);
 ** tokenize.c
 */
 t_token	*tokenize(char *str, char **env);
-int	count_tokens(char *str);
+int		count_tokens(char *str);
 void	handle_count(int *status, int flag, int *count);
-int	parse_token(t_token *token, char *str, int *j, char **env);
+int		parse_token(t_token *token, char *str, int *j, char **env);
 
 /*
 ** tokenize_process.c
 */
-int	process_redir(char *str, int j, char **token, char **env);
-int	process_squote(char *str, int j, char **token);
-int	process_dquote(char *str, int j, char **token, char **env);
-int	process_env(char *str, int j, char **token, char **env);
+int		process_redir(char *str, int j, char **token, char **env);
+int		process_squote(char *str, int j, char **token);
+int		process_dquote(char *str, int j, char **token, char **env);
+int		process_env(char *str, int j, char **token, char **env);
 
 /*
 ** tokenize_utils.c
 */
 void	get_env_token(char **token, char **env, char *var_name);
-int	get_exit_status(char **token, int j);
+int		get_exit_status(char **token, int j);
 void	concat_char(char **str, char c);
-int	check_quote(char *str, int i, char quote);
+int		check_quote(char *str, int i, char quote);
 
 /*
 ** parse.c
@@ -219,13 +231,13 @@ t_node	*parse(t_token *tokens);
 /*
  ** check_syntax.c
 */
-int	check_syntax(t_data *input);
+int		check_syntax(t_data *input);
 
 /*
 ** utils.c
 */
-int	get_cmdline_len(char **cmdline);
-int ft_strcmp(char *s1, char *s2);
+int		get_cmdline_len(char **cmdline);
+int		ft_strcmp(char *s1, char *s2);
 int		ft_strcmp2(const char *s1, const char *s2);
 
 /*

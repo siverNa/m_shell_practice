@@ -21,7 +21,12 @@ void	shell_ready(t_data *input, t_node *cmds, t_node *list)
 {
 	input->tokens = tokenize(input->str, input->env);
 	if (check_syntax(input) == -1)
+	{
+		add_history(input->str);
+		free(input->str);
+		free_tokens(input->tokens);
 		return ;
+	}
 	list = parse(input->tokens);
 	cmds = list;
 	process(cmds, input, input->str);

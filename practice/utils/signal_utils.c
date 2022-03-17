@@ -6,7 +6,7 @@
 /*   By: sna <sna@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 23:27:01 by sna               #+#    #+#             */
-/*   Updated: 2022/03/16 23:31:57 by sna              ###   ########.fr       */
+/*   Updated: 2022/03/17 19:22:01 by sna              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,7 @@ void	sig_handler2(int signum)
 	if (signum == SIGQUIT)
 	{
 		if (pid == -1)
-		{
-			rl_on_new_line();
-			ft_putstr_fd(" \n", 1);
-			rl_replace_line("", 1);
-			rl_redisplay();
-			ft_putstr_fd("  \b\b", 1);
-		}
+			;
 		else
 			ft_putstr_fd("Quit: 3\n", 1);
 	}

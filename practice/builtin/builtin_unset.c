@@ -9,9 +9,7 @@ int	isvalid_env(char *line)
 	{
 		if (ft_isdigit(line[0]))
 			return (FALSE);
-		if (ft_isalnum(line[i]) || line[i] == '_')
-			;
-		else
+		if (!ft_isalnum(line[i]) && line[i] != '_')
 			return (FALSE);
 	}
 	if (!i)

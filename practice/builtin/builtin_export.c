@@ -33,6 +33,7 @@ void	print_export(t_data *input)
 	sort_envs(temp, input, size);
 	while (temp[i])
 	{
+		ft_putstr_fd("declare -x ", STDOUT);
 		ft_putstr_fd(temp[i], STDOUT);
 		write(STDOUT, "\n", 1);
 		i++;

@@ -58,5 +58,6 @@ int	main(int ac, char **av, char **env)
 		else
 			shell_ready(&input, list, cmds);
 	}
+	free_2d_arr(input.env);
 	return (g_exit_status & 255);
 }

@@ -82,9 +82,12 @@ void	builtin_redir_nopipe(t_node *cmd, t_data *input)
 	}
 	waitpid(pid, &status, 0);
 	s = cmd->cmd_line[0];
-	if (!ft_strcmp(s, "echo") && !ft_strcmp(s, "env") && !ft_strcmp(s, "pwd"))
+	if (ft_strcmp(s, "echo") || ft_strcmp(s, "env") || ft_strcmp(s, "pwd"))
+		;
+	else if (ft_strcmp(s, "export") && get_cmdline_len(cmd->cmd_line) == 1)
+		;
+	else
 		start_builtin(cmd, cmd->cmd_line, input);
-	
 	return ;
 }
 

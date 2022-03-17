@@ -57,7 +57,7 @@ int	check_env(char *str, char *envs)
 	return (0);
 }
 
-void copy_env_to_new(char **new, char ***c_envs, int *i)
+void	copy_env_to_new(char **new, char ***c_envs, int *i)
 {
 	while ((*c_envs)[++(*i)])
 	{

@@ -213,6 +213,8 @@ int	process_env(char *str, int j, char **token, char **env);
 /*
 ** tokenize_utils.c
 */
+void	get_env_token(char **token, char **env, char *var_name);
+int	get_exit_status(char **token, int j);
 void	concat_char(char **str, char c);
 int	check_quote(char *str, int i, char quote);
 
@@ -229,6 +231,7 @@ int	check_syntax(t_data *input);
 /*
 ** utils.c
 */
+int	get_cmdline_len(char **cmdline);
 int ft_strcmp(char *s1, char *s2);
 int		ft_strcmp2(const char *s1, const char *s2);
 

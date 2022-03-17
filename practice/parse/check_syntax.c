@@ -45,10 +45,11 @@ int	check_syntax(t_data *input)
 			i = check_redir(input->tokens, i);
 		else
 			i = -1;
-		if (i == - 1)
+		if (i == -1)
 		{
 			free(input->str);
 			free_tokens(input->tokens);
+			g_exit_status = 2;
 			return (-1);
 		}
 	}

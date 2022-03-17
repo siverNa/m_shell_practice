@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_prec.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minhekim <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: sna <sna@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 14:33:34 by minhekim          #+#    #+#             */
-/*   Updated: 2022/03/17 14:33:38 by minhekim         ###   ########.fr       */
+/*   Updated: 2022/03/17 15:22:20 by sna              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -239,6 +239,8 @@ int		check_syntax(t_data *input);
 int		get_cmdline_len(char **cmdline);
 int		ft_strcmp(char *s1, char *s2);
 int		ft_strcmp2(const char *s1, const char *s2);
+void	input_ctrld_exit(void);
+void	receive_child_status(int status);
 
 /*
 ** sort_envs.c

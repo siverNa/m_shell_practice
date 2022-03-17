@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prec_process.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minhekim <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: sna <sna@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 14:32:15 by minhekim          #+#    #+#             */
-/*   Updated: 2022/03/17 14:32:17 by minhekim         ###   ########.fr       */
+/*   Updated: 2022/03/17 15:26:10 by sna              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	child_process(t_node *cmd, t_data *input, char *str, t_node *n_cmd)
 		res = execve(path, cmd->cmd_line, input->env);
 	if (res == -1)
 		print_exe_error_msg(cmd, str);
-	exit(res);
+	exit(127);
 }
 
 int	start_pipe(t_node *cmd, t_data *input, char *str)
@@ -70,6 +70,7 @@ int	start_pipe(t_node *cmd, t_data *input, char *str)
 	if (pid == 0)
 		child_process(cmd, input, str, n_cmd);
 	waitpid(pid, &status, 0);
+	receive_child_status(status);
 	if (cmd->status == 1)
 		close(n_cmd->fd[1]);
 	if (cmd->fd[0] != 0)

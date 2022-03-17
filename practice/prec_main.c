@@ -6,7 +6,7 @@
 /*   By: sna <sna@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 14:34:41 by sna               #+#    #+#             */
-/*   Updated: 2022/03/17 14:34:43 by sna              ###   ########.fr       */
+/*   Updated: 2022/03/17 15:30:01 by sna              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,12 +64,7 @@ int	main(int ac, char **av, char **env)
 	{
 		input.str = readline("\033[34;1mpractice : \033[0m");
 		if (!(input.str))
-		{
-			printf("\033[1A");
-			printf("\033[10C");
-			printf(" exit\n");
-			exit(-1);
-		}
+			input_ctrld_exit();
 		else if (*(input.str) == '\0')
 			free(input.str);
 		else

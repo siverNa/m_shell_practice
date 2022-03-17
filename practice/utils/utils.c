@@ -6,7 +6,7 @@
 /*   By: sna <sna@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 14:35:14 by sna               #+#    #+#             */
-/*   Updated: 2022/03/17 14:35:15 by sna              ###   ########.fr       */
+/*   Updated: 2022/03/17 15:31:28 by sna              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,4 +64,23 @@ int	ft_strcmp2(const char *s1, const char *s2)
 		i++;
 	}
 	return (0);
+}
+
+void	input_ctrld_exit(void)
+{
+	ft_putstr_fd("\033[1A", 1);
+	ft_putstr_fd("\033[10C", 1);
+	ft_putstr_fd(" exit\n", 1);
+	exit(-1);
+}
+
+void	receive_child_status(int status)
+{
+	int	ex_code;
+
+	if (WIFEXITED(status))
+	{
+		ex_code = WEXITSTATUS(status);
+		g_exit_status = ex_code;
+	}
 }

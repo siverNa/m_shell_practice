@@ -48,23 +48,3 @@ int	start_builtin(t_node *cmd, char **cmd_line, t_data *input)
 		return (0);
 	return (1);
 }
-
-int	remove_char(char *str, char c)
-{
-	int		new_i;
-	int		i;
-
-	new_i = 0;
-	i = 0;
-	while (str[i])
-	{
-		if (str[i] != c)
-		{
-			str[new_i] = str[i];
-			new_i++;
-		}
-		i++;
-	}
-	str[new_i] = '\0';
-	return (TRUE);
-}

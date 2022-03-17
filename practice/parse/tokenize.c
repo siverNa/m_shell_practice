@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenize.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minhekim <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: sna <sna@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 14:27:12 by minhekim          #+#    #+#             */
-/*   Updated: 2022/03/17 14:27:13 by minhekim         ###   ########.fr       */
+/*   Updated: 2022/03/17 15:52:25 by sna              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	parse_token(t_token *token, char *str, int *j, char **env)
 	}
 	if (str[*j] == '<' || str[*j] == '>')
 	{
-		*j = process_redir(str, *j, &(token->value), env);
+		*j = process_redir(str, *j, &(token->value));
 		return (2);
 	}
 	while (str[*j] && str[*j] != ' ' && str[*j] != '|')

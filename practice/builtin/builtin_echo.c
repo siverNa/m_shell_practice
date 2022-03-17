@@ -6,7 +6,7 @@
 /*   By: sna <sna@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 14:36:18 by sna               #+#    #+#             */
-/*   Updated: 2022/03/17 14:36:18 by sna              ###   ########.fr       */
+/*   Updated: 2022/03/17 15:40:58 by sna              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	is_option_n(char *str)
 	return (TRUE);
 }
 
-void	built_echo(char **cmd_line, char **envs)
+void	built_echo(char **cmd_line)
 {
 	int	i;
 	int	res;

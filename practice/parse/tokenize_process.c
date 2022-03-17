@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenize_process.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minhekim <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: sna <sna@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 14:27:20 by minhekim          #+#    #+#             */
-/*   Updated: 2022/03/17 14:27:22 by minhekim         ###   ########.fr       */
+/*   Updated: 2022/03/17 15:51:35 by sna              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,6 @@
 int	process_env(char *str, int j, char **token, char **env)
 {
 	char	*var_name;
-	char	*value;
-	int		k;
 
 	j++;
 	var_name = NULL;
@@ -42,8 +40,6 @@ int	process_env(char *str, int j, char **token, char **env)
 int	process_env_quote(char *str, int j, char **token, char **env)
 {
 	char	*var_name;
-	char	*value;
-	int		k;
 
 	j++;
 	var_name = NULL;
@@ -52,17 +48,16 @@ int	process_env_quote(char *str, int j, char **token, char **env)
 		concat_char(token, '$');
 		return (j);
 	}
+	if (str[j] == '?')
+		return (get_exit_status(token, j));
 	while (ft_isalnum(str[j]) || str[j] == '_')
 		concat_char(&var_name, str[j++]);
 	if (var_name == NULL)
 	{
-		concat_char(token, '$');
+		*token = ft_strdup("");
 		return (j);
 	}
-	value = find_value(var_name, env);
-	k = 0;
-	while (value[k])
-		concat_char(token, value[k++]);
+	get_env_token(token, env, var_name);
 	free(var_name);
 	return (j);
 }
@@ -114,7 +109,7 @@ int	process_squote(char *str, int j, char **token)
 	return (j);
 }
 
-int	process_redir(char *str, int j, char **token, char **env)
+int	process_redir(char *str, int j, char **token)
 {
 	if (str[j] == '<')
 	{

@@ -6,13 +6,13 @@
 /*   By: sna <sna@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 14:32:07 by minhekim          #+#    #+#             */
-/*   Updated: 2022/03/17 15:16:12 by sna              ###   ########.fr       */
+/*   Updated: 2022/03/17 15:42:21 by sna              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell_prec.h"
 
-int	print_exe_error_msg(t_node *cmd, char *str)
+int	print_exe_error_msg(t_node *cmd)
 {
 	ft_putstr_fd("practice : command not found: ", 2);
 	ft_putstr_fd(cmd->cmd_line[0], 2);

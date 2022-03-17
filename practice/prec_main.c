@@ -6,7 +6,7 @@
 /*   By: sna <sna@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 14:34:41 by sna               #+#    #+#             */
-/*   Updated: 2022/03/17 15:30:01 by sna              ###   ########.fr       */
+/*   Updated: 2022/03/17 15:47:49 by sna              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	shell_ready(t_data *input, t_node *cmds, t_node *list)
 	}
 	list = parse(input->tokens);
 	cmds = list;
-	process(cmds, input, input->str);
+	process(cmds, input);
 	add_history(input->str);
 	free(input->str);
 	free_tokens(input->tokens);
@@ -60,9 +60,11 @@ int	main(int ac, char **av, char **env)
 	(void)av;
 	input.env = NULL;
 	input.env = copy_envs(env);
+	list = NULL;
+	cmds = NULL;
 	while (1)
 	{
-		input.str = readline("\033[34;1mpractice : \033[0m");
+		input.str = readline("\033[34;1mminishell : \033[0m");
 		if (!(input.str))
 			input_ctrld_exit();
 		else if (*(input.str) == '\0')

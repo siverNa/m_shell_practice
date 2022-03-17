@@ -6,7 +6,7 @@
 #    By: sna <sna@student.42seoul.kr>               +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/17 14:37:01 by sna               #+#    #+#              #
-#    Updated: 2022/03/17 14:37:01 by sna              ###   ########.fr        #
+#    Updated: 2022/03/17 15:35:44 by sna              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,10 +36,10 @@ OBJS =		$(SRCS:.c=.o)
 
 $(NAME) :	$(OBJS)
 			@$(MAKE) bonus -C ../libft
-			$(CC) $^ -I . $(COMPILE_FLAG) $(LIBFT) -o $@ $(G3)
+			$(CC) $(CFLAGS) $^ -I . $(COMPILE_FLAG) $(LIBFT) -o $@ $(G3)
 
 %.o:		%.c
-			$(CC) -c $^ -o $@ $(OBJ_FLAG)
+			$(CC) $(CFLAGS) -c $^ -o $@ $(OBJ_FLAG)
 
 all :		$(NAME)
 

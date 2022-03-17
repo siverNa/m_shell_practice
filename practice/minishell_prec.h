@@ -6,7 +6,7 @@
 /*   By: sna <sna@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 14:33:34 by minhekim          #+#    #+#             */
-/*   Updated: 2022/03/17 15:22:20 by sna              ###   ########.fr       */
+/*   Updated: 2022/03/17 15:52:39 by sna              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,9 +86,9 @@ void	shell_ready(t_data *input, t_node *cmds, t_node *list);
 **	prec_process.c
 */
 void	free_struct(t_node *cmd);
-void	child_process(t_node *cmd, t_data *input, char *str, t_node *n_cmd);
-int		start_pipe(t_node *cmd, t_data *input, char *str);
-void	process(t_node *cmd, t_data *input, char *str);
+void	child_process(t_node *cmd, t_data *input, t_node *n_cmd);
+int		start_pipe(t_node *cmd, t_data *input);
+void	process(t_node *cmd, t_data *input);
 
 /*
 ** redirect.c
@@ -131,7 +131,7 @@ int		remove_char(char *str, char c);
 */
 int		built_cd(char **cmd_line, char **c_envs);
 int		start_cd(char *input, char **c_envs);
-void	set_cd_pwd(char *ch_path, char *old_pwd, char *path, char **c_envs);
+void	set_cd_pwd(char *path, char **c_envs);
 
 /*
 ** builtin_pwd.c
@@ -158,7 +158,7 @@ void	built_export(t_node *cmd, char **cmd_line, t_data *input);
 void	echo_exit_status(void);
 void	echo_envs(char **cmd_line, char **envs, int i);
 int		is_option_n(char *str);
-void	built_echo(char **cmd_line, char **envs);
+void	built_echo(char **cmd_line);
 
 /*
 ** builtin_unset.c
@@ -178,7 +178,7 @@ void	built_exit(t_node *cmd, char **cmd_line);
 /*
 ** error_execute.c
 */
-int		print_exe_error_msg(t_node *cmd, char *str);
+int		print_exe_error_msg(t_node *cmd);
 int		print_error_msg(char *input, char *err_msg);
 int		print_error_msg_2(char *first, char *sec, char *err_msg);
 void	print_identify_error_msg(char *first, char *sec);
@@ -210,7 +210,7 @@ int		parse_token(t_token *token, char *str, int *j, char **env);
 /*
 ** tokenize_process.c
 */
-int		process_redir(char *str, int j, char **token, char **env);
+int		process_redir(char *str, int j, char **token);
 int		process_squote(char *str, int j, char **token);
 int		process_dquote(char *str, int j, char **token, char **env);
 int		process_env(char *str, int j, char **token, char **env);

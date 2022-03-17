@@ -42,7 +42,7 @@ int	print_error_msg_2(char *first, char *sec, char *err_msg)
 	return (-1);
 }
 
-void	print_identify_error_msg(char *first, char *sec)
+int	print_identify_error_msg(char *first, char *sec)
 {
 	ft_putstr_fd("practice", STDERR);
 	ft_putstr_fd(": ", STDERR);
@@ -50,4 +50,5 @@ void	print_identify_error_msg(char *first, char *sec)
 	ft_putstr_fd(": `", STDERR);
 	ft_putstr_fd(sec, STDERR);
 	ft_putstr_fd("': not a valid identifier\n", STDERR);
+	return (0);
 }

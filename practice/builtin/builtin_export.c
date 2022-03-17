@@ -87,6 +87,7 @@ void	built_export(t_node *cmd, char **cmd_line, t_data *input)
 	int		res;
 
 	i = 0;
+	res = 0;
 	if (cmd->pre_status == 1)
 		return ;
 	if (arr_2dchar_len(cmd_line) == 1)
@@ -98,10 +99,7 @@ void	built_export(t_node *cmd, char **cmd_line, t_data *input)
 			if (isvalid_export(cmd_line[i]))
 				res = start_export(cmd_line[i], &input->env);
 			else
-			{	
-				print_identify_error_msg("export", cmd_line[i]);
-				res = 0;
-			}
+				res = print_identify_error_msg("export", cmd_line[i]);
 		}
 	}
 	if (res == 1)

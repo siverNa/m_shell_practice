@@ -33,7 +33,7 @@ int	is_option_n(char *str)
 
 	if (!str)
 		return (FALSE);
-	if (strncmp(str, "-n", 2) != 0)
+	if (ft_strncmp(str, "-n", 2) != 0)
 		return (FALSE);
 	i = 2;
 	while (str[i])
@@ -59,8 +59,6 @@ void	built_echo(char **cmd_line)
 	}
 	while (cmd_line[i])
 	{
-		if (cmd_line[i][0] == '\'')
-			res = remove_char(cmd_line[i], '\'');
 		ft_putstr_fd(cmd_line[i], 1);
 		if (cmd_line[i + 1] != NULL)
 			ft_putchar_fd(' ', 1);

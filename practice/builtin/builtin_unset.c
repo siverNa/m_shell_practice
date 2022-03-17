@@ -83,7 +83,6 @@ void	built_unset(t_node *cmd, char **cmd_line, t_data *input)
 	}
 	while (cmd_line[i])
 	{
-		remove_char(cmd_line[i], '\'');
 		res = isvalid_env(cmd_line[i]) && env_unset(cmd_line[i], &input->env);
 		i++;
 	}

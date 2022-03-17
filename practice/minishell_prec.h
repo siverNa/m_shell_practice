@@ -124,7 +124,6 @@ char	*build_path(t_node *cmd, t_data *input, char *cmd_line);
 */
 int		check_builtin(char **cmd_line);
 int		start_builtin(t_node *cmd, char **cmd_line, t_data *input);
-int		remove_char(char *str, char c);
 
 /*
 ** builtin_cd.c
@@ -181,7 +180,7 @@ void	built_exit(t_node *cmd, char **cmd_line);
 int		print_exe_error_msg(t_node *cmd);
 int		print_error_msg(char *input, char *err_msg);
 int		print_error_msg_2(char *first, char *sec, char *err_msg);
-void	print_identify_error_msg(char *first, char *sec);
+int		print_identify_error_msg(char *first, char *sec);
 
 /*
 ** env_util.c

@@ -8,19 +8,18 @@ void	add_export(char *str, char **new, int i)
 
 int	isvalid_export(char *input)
 {
-	int		i;
+	char	**check;
+	char	*key;
+	int		res;
 
-	i = 0;
-	while (input[i])
-	{
-		if (input[i] >= '0' && input[i] <= '9')
-			return (FALSE);
-		i++;
-	}
-	return (TRUE);
+	check = ft_split(input, '=');
+	key = check[0];
+	res = isvalid_env(key);
+	free_2d_arr(check);
+	return (res);
 }
 
-void	print_export(char **envs)
+void	print_export(t_data *input)
 {
 	int		i;
 	int		size;
@@ -28,12 +27,13 @@ void	print_export(char **envs)
 
 	i = 0;
 	size = 0;
-	while (envs[size])
+	while (input->env[size])
 		size++;
 	temp = (char **)malloc(sizeof(char *) * (size + 1));
-	sort_envs(temp, envs, size);
+	sort_envs(temp, input, size);
 	while (temp[i])
 	{
+		ft_putstr_fd("declare -x ", STDOUT);
 		ft_putstr_fd(temp[i], STDOUT);
 		write(STDOUT, "\n", 1);
 		i++;
@@ -75,22 +75,24 @@ void	built_export(t_node *cmd, char **cmd_line, t_data *input)
 	int		res;
 
 	i = 0;
-	res = 1;
 	if (cmd->pre_status == 1)
 		return ;
 	if (arr_2dchar_len(cmd_line) == 1)
-		print_export(input->env);
+		print_export(input);
 	else
 	{
 		while (cmd_line[++i])
 		{
-			if (start_export(cmd_line[i], &input->env))
-				;
+			if (isvalid_export(cmd_line[i]))
+				res = start_export(cmd_line[i], &input->env);
 			else
+			{	
+				print_identify_error_msg("export", cmd_line[i]);
 				res = 0;
+			}
 		}
 	}
-	if (res)
+	if (res == 1)
 		g_exit_status = 0;
 	else
 		g_exit_status = 1;

@@ -7,9 +7,9 @@ int	isvalid_env(char *line)
 	i = -1;
 	while (line[++i])
 	{
-		if (ft_isalnum(line[i]) || line[i] == '_')
-			;
-		else
+		if (ft_isdigit(line[0]))
+			return (FALSE);
+		if (!ft_isalnum(line[i]) && line[i] != '_')
 			return (FALSE);
 	}
 	if (!i)
@@ -63,6 +63,12 @@ void	built_unset(t_node *cmd, char **cmd_line, t_data *input)
 	res = 0;
 	if (cmd->pre_status == 1)
 		return ;
+	if (cmd_line[i] == NULL)
+	{
+		print_error_msg("unset", "not enough arguments");
+		g_exit_status = 1;
+		return ;
+	}
 	while (cmd_line[i])
 	{
 		remove_char(cmd_line[i], '\'');

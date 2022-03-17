@@ -16,7 +16,7 @@ endif
 SRCS =		prec_main.c exec/prec_process.c parse/cmd_init.c parse/cmd_case.c parse/cmd_build_path.c \
 			builtin/builtin.c builtin/builtin_cd.c builtin/builtin_pwd.c builtin/builtin_env.c builtin/builtin_export.c \
 			builtin/builtin_echo.c builtin/builtin_unset.c builtin/builtin_exit.c \
-			utils/env_util.c utils/sort_envs.c exec/error_execute.c \
+			utils/env_util.c utils/sort_envs.c utils/signal_utils.c exec/error_execute.c \
 			utils/free.c parse/parse.c parse/tokenize.c parse/check_syntax.c utils/utils.c \
 			parse/tokenize_utils.c parse/tokenize_process.c exec/redirect.c
 

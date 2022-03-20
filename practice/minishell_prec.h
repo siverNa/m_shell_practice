@@ -6,7 +6,7 @@
 /*   By: sna <sna@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 14:33:34 by minhekim          #+#    #+#             */
-/*   Updated: 2022/03/20 02:02:31 by sna              ###   ########.fr       */
+/*   Updated: 2022/03/20 22:53:21 by sna              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,6 +181,7 @@ int		print_exe_error_msg(t_node *cmd);
 int		print_error_msg(char *input, char *err_msg);
 int		print_error_msg_2(char *first, char *sec, char *err_msg);
 int		print_identify_error_msg(char *first, char *sec);
+int		print_errno(char *cmd, int res);
 
 /*
 ** env_util.c
@@ -249,7 +250,6 @@ void	sort_envs(char **temp, t_data *input, int size);
 /*
 ** signal_utils.c
 */
-void	sig_handler2(int signum);
 void	sig_handler(int signum);
 void	setting_signal(void);
 

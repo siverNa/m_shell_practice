@@ -6,7 +6,7 @@
 #    By: sna <sna@student.42seoul.kr>               +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/17 14:37:01 by sna               #+#    #+#              #
-#    Updated: 2022/03/17 15:35:44 by sna              ###   ########.fr        #
+#    Updated: 2022/03/20 01:56:08 by sna              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,7 @@ SRCS =		prec_main.c exec/prec_process.c parse/cmd_init.c parse/cmd_case.c parse/
 			builtin/builtin_echo.c builtin/builtin_unset.c builtin/builtin_exit.c \
 			utils/env_util.c utils/sort_envs.c utils/signal_utils.c exec/error_execute.c \
 			utils/free.c parse/parse.c parse/tokenize.c parse/check_syntax.c utils/utils.c \
-			parse/tokenize_utils.c parse/tokenize_process.c exec/redirect.c
+			parse/tokenize_utils.c parse/tokenize_process.c exec/redirect.c exec/pipe_setting.c
 
 OBJS =		$(SRCS:.c=.o)
 

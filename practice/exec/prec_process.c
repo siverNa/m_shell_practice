@@ -6,7 +6,7 @@
 /*   By: sna <sna@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 14:32:15 by minhekim          #+#    #+#             */
-/*   Updated: 2022/03/17 15:47:19 by sna              ###   ########.fr       */
+/*   Updated: 2022/03/20 22:30:02 by sna              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,14 +59,19 @@ int	start_pipe(t_node *cmd, t_data *input)
 	res = 0;
 	n_cmd = cmd;
 	if (cmd->status == 1)
-	{
+	/*{
 		if (cmd->next == NULL)
 			return (-1);
 		n_cmd = cmd->next;
 		n_cmd-> pre_status = 1;
 		pipe(n_cmd->fd);
+	}*/
+		is_pipe(&cmd, &n_cmd);
+	if ((pid = fork()) == -1)
+	{
+		print_error_msg("fork", "fork error");
+		exit(1);
 	}
-	pid = fork();
 	if (pid == 0)
 		child_process(cmd, input, n_cmd);
 	waitpid(pid, &status, 0);

@@ -6,7 +6,7 @@
 /*   By: sna <sna@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 14:33:34 by minhekim          #+#    #+#             */
-/*   Updated: 2022/03/17 15:52:39 by sna              ###   ########.fr       */
+/*   Updated: 2022/03/20 02:02:31 by sna              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -252,5 +252,10 @@ void	sort_envs(char **temp, t_data *input, int size);
 void	sig_handler2(int signum);
 void	sig_handler(int signum);
 void	setting_signal(void);
+
+/*
+** pipe_setting.c
+*/
+int		is_pipe(t_node **cmd, t_node **n_cmd);
 
 #endif

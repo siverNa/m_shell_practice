@@ -6,21 +6,46 @@
 /*   By: sna <sna@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 23:27:01 by sna               #+#    #+#             */
-/*   Updated: 2022/03/20 22:49:19 by sna              ###   ########.fr       */
+/*   Updated: 2022/03/21 16:11:40 by sna              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell_prec.h"
 
+void	sig_handler2(int signum)
+{
+	pid_t	pid;
+	int		status;
+
+	pid = waitpid(-1, &status, WNOHANG);
+	if (signum == SIGQUIT)
+	{
+		if (pid == -1)
+			;
+		else
+			ft_putstr_fd("Quit: 3\n", 1);
+		g_exit_status = 128 + signum;
+	}
+}
+
 void	sig_handler(int signum)
 {
+	pid_t	pid;
+	int		status;
+
+	pid = waitpid(-1, &status, WNOHANG);
 	if (signum == SIGINT)
 	{
-		write(STDOUT, "\n", 1);
-		rl_on_new_line();
-		rl_replace_line("", 0);
-		rl_redisplay();
-		g_exit_status = 130;
+		if (pid == -1)
+		{
+			ft_putstr_fd("\n", 1);
+			rl_on_new_line();
+			rl_replace_line("", 0);
+			rl_redisplay();
+		}
+		else
+			ft_putstr_fd("\n", 1);
+		g_exit_status = 128 + signum;
 	}
 }
 
@@ -35,6 +60,6 @@ void	setting_signal(void)
 	tcsetattr(STDIN_FILENO, TCSANOW, &new_term);
 	if (signal(SIGINT, sig_handler) == SIG_ERR)
 		print_errno(NULL, 1);
-	if (signal(SIGQUIT, SIG_IGN) == SIG_ERR)
+	if (signal(SIGQUIT, sig_handler2) == SIG_ERR)
 		print_errno(NULL, 1);
 }

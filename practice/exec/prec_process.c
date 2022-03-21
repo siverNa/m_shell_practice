@@ -6,7 +6,7 @@
 /*   By: sna <sna@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 14:32:15 by minhekim          #+#    #+#             */
-/*   Updated: 2022/03/20 23:01:36 by sna              ###   ########.fr       */
+/*   Updated: 2022/03/21 16:32:02 by sna              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,8 @@ int	start_pipe(t_node *cmd, t_data *input)
 	n_cmd = cmd;
 	if (cmd->status == 1)
 		is_pipe(&cmd, &n_cmd);
-	if ((pid = fork()) == -1)
+	pid = fork();
+	if (pid == -1)
 	{
 		print_error_msg("fork", "fork error");
 		exit(1);

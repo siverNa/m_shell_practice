@@ -6,7 +6,7 @@
 /*   By: sna <sna@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 14:26:50 by minhekim          #+#    #+#             */
-/*   Updated: 2022/03/17 14:37:35 by sna              ###   ########.fr       */
+/*   Updated: 2022/03/21 17:15:39 by sna              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	check_pipe(t_token *tokens, int i)
 		return (i + 1);
 	if (i != 0 && tokens[i + 1].type == 2)
 		return (i + 1);
-	ft_putstr_fd("-bash: syntax error near unexpected token \'", 1);
+	ft_putstr_fd("-minishell: syntax error near unexpected token \'", 2);
 	ft_putstr_fd(tokens[i].value, 1);
 	write(1, "\'\n", 2);
 	return (-1);
@@ -36,7 +36,7 @@ int	check_redir(t_token *tokens, int i)
 	i++;
 	if (tokens[i].type == 0)
 		return (i);
-	ft_putstr_fd("-bash: syntax error near unexpected token \'", 1);
+	ft_putstr_fd("-minishell: syntax error near unexpected token \'", 2);
 	ft_putstr_fd(tokens[i - 1].value, 1);
 	write(1, "\'\n", 2);
 	return (-1);

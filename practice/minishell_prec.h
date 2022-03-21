@@ -6,7 +6,7 @@
 /*   By: sna <sna@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 14:33:34 by minhekim          #+#    #+#             */
-/*   Updated: 2022/03/21 16:09:29 by sna              ###   ########.fr       */
+/*   Updated: 2022/03/21 17:11:02 by sna              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -250,7 +250,6 @@ void	sort_envs(char **temp, t_data *input, int size);
 /*
 ** signal_utils.c
 */
-void	sig_handler2(int signum);
 void	sig_handler(int signum);
 void	setting_signal(void);
 
